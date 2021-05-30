@@ -140,6 +140,12 @@ export default StyleSheet.create({
     width: width/2.6,
     backgroundColor: 'black',
     height: "75%",
+  }, container: {
+    flex: 1,
+    fontFamily: 'Montserrat',
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor : '#A6E4D0',
   },
 
 

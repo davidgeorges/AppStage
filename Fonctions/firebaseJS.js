@@ -252,7 +252,7 @@ export const getMail = (username, callback) => {
 /* --------------------------------------------------- */
 
 
-
+var tab = [];
 /* Fonction pour stocker les info  récuperer dans notre fonction client  */
 export const setInfo = (mail) => {
 
@@ -311,16 +311,18 @@ export const getAllInfo = (mail, callback) => {
 /* Fonction pour récuperer un set d'item */
 export const getSetItem = (item,callback) => {
 
+  
   var i = 0;
   firebase.firestore().collection("items").doc("week1").collection("set1").get()
     .then((querySnapshot) => {
       if (querySnapshot.size > 0) {
         querySnapshot.forEach((doc) => {
+          tab.push(doc.data());
           ++i
           console.log("set d'ITEM recuperer : ", doc.data().title, " price : ", doc.data().price, " : ", "item" + i.toString());
           st.saveItem("item" + i.toString(), doc.data());
 
-        }),callback()
+        }),callback(tab)
       } else {
         console.log("ITEM non recuperer (  ) :", item);
 
