@@ -11,9 +11,12 @@ export default StyleSheet.create({
 
   },
   title: {
-    position:"absolute",
-    bottom:"25%",
-    left:"5%",
+    fontWeight:"bold",
+    fontSize:"20",
+    color:'#333',
+    letterSpacing:1
+
+   
   },
   mid: {
     flex: 3,
@@ -50,23 +53,29 @@ export default StyleSheet.create({
     width: width / 1.4,
   },
   headerBars: {
-    position:"absolute",
-    bottom:"25%",
-    left:"88%",
-
+    marginLeft:"80%"
   },
   header: {
     
-    flex:0.5,
+    width:"100%",
+    height:"100%",
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"center",
     backgroundColor:"#FFF8F0",
     borderBottomColor: 'black',
     borderBottomWidth: 1,
   },
   footer: {
+    /*
     flex:0.5,
     backgroundColor:"#FFF8F0",
     borderTopColor: 'black',
     borderTopWidth: 1,
+    flexDirection:"row",
+
+    alignItems:"center",
+    justifyContent:"center",*/
 
   },
   recTop: {

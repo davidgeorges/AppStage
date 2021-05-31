@@ -19,6 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+
 /* Confirugration database (OK 19/05/21) */
 export const firebaseConfig = {
   apiKey: "AIzaSyBejP_R_VYJ02J-crnIgin0USNaHqjkyjY",

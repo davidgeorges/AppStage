@@ -11,6 +11,7 @@ import * as st from "./setItemInfo"
 
 
 
+
 /*Fonction pour se connecter avec nom d'utilisateur ou mail (TEST 28/05/21) , passwordReceive, navigation, myTextInput, myTextInput2, callbackF*/
 export const toLogin2 = (mailReceive, passwordReceive, navigation, myTextInput, myTextInput2, callbackClear, callbackError) => {
 
@@ -335,3 +336,18 @@ export const getSetItem = (item,callback) => {
     });
 }
 /* --------------------------------------------------- */
+
+export const dd = () =>{
+  const dbRef = firebase.database().ref();
+
+  dbRef.child("Aticle_Ensemble").get().then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+  
+}

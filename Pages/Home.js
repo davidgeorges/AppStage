@@ -7,6 +7,11 @@ import { useFocusEffect } from '@react-navigation/native';
 import styles from 'C:/Users/S/Desktop/React_App_Stage/App_Stage/Styles/styleHome';
 import { FontAwesome } from '@expo/vector-icons';
 import Item from "../Components/Item"
+import axios from "axios";
+import tailwind from 'tailwind-rn';
+import firebase from 'firebase'
+
+
 
 
 
@@ -14,23 +19,44 @@ import Item from "../Components/Item"
 
 export default function App({ navigation }) {
 
+  const test = () =>{
+    
+    let lstArticle =[]
 
+    data[0].map((dt,i) =>{
+      lstArticle.push(
+      <Item k={i} nom={dt.nom} url={dt.url} description={dt.description}></Item>) 
+    })
+    return lstArticle;
+  }
+
+  let tab = [];
   const [loading, setLoading] = useState(false);
   const [text, setText] = React.useState('');
-  const [data,setData]= useState([]);
+  const [data, setData] = useState([]);
   cl.setNavigation(navigation);
 
-/*
+
+  /* USE EFFECT */
   useEffect(() => {
+    const dbRef = firebase.database().ref();
 
-      
-      db.getSetItem("", (val) => {
-        setData(val);
-        setLoading(false);
-      })
-
-
-  },[]) Tableauv vide =  va être executer qu'une seule fois au lancement*/
+    dbRef.child("Aticle_Ensemble").get().then((snapshot) => {
+      if (snapshot.exists()) {
+        tab.push(snapshot.val());
+        setData(tab)
+        console.log("FINI");
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+    /*
+    setData(val);
+    setLoading(false);*/
+  }, []) /*Tableauv vide =  va être executer qu'une seule fois au lancement*/
+  /* --------------------------------------------------------------------------- */
 
   /*Pour empecher le fait de revenir en arrière sur la page HOME "*/
   useFocusEffect(
@@ -45,59 +71,19 @@ export default function App({ navigation }) {
         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }),
   );
+  /* ---------------------------------------------------------------------- */
 
-  //BackHandler.removeEventListener("hardwareBackPress", backAction);
-
-
+    /* Si on a pas fini de charger les données ... */
   if (loading) {
     return (<View style={{ height: "100%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
       <ActivityIndicator size="large" />
     </View>)
   }
-  const path = `https://hikomori-back.herokuapp.com/manga`
-  useEffect(() => {
-    axios
-      .get(path)
-      .then(response => {
-        setData(response.data.slice(0,100))
-      })
-  },
-    [])
-
-
-  const Manga = () => {
-    let lstManga = []
-    let contenu = ""
-    data.map((manga, i) => {
-      // permet de vérifier si le synopsis possède plus de 250 caractére
-      if (manga.synopsis.length > 250) {
-        contenu = manga.synopsis.substr(0, 250) + '...'
-      }
-
-      lstManga.push(
-        <View key={i} style={tailwind(' text-center')}> 
-        <View style={tailwind('  mb-8')}>
-          <TouchableHighlight style={tailwind('mx-7 rounded-2xl')} onPress={() =>
-             //permet daller à la page Details Manga
-            navigate('Details Manga', {
-              id: manga.id,
-              otherParam: 'anything you want here',
-            })
-          }>
-          <Image style={tailwind(' h-48 w-full rounded-2xl ')} source={{uri : manga.posterImageSmall }} alt={'image' + i}></Image>
-          
-          </TouchableHighlight>
-          <Text  style={tailwind(' text-center font-bold mt-2')}>{manga.tittles_jap}</Text>
-          </View>
-          
-          </View>
-      )
-    })
-    return lstManga
-  }
+  /* ------------------------------------------------------------------------ */  
+  console.log("Data : ",data)
 
   return (
-    
+
     <View >
       <View style={styles.header}>
         <Text style={styles.title}>Home</Text>
@@ -105,32 +91,31 @@ export default function App({ navigation }) {
         <FontAwesome style={styles.headerBars} name="bars" size={24} color="black" onPress={() => navigation.toggleDrawer()} />
       </View>
 
-    <ScrollView>
-    <View style={styles.image}>
-
-      
+      <ScrollView>
+        <View style={styles.image}>
 
 
-      <View style={styles.mid}>
 
 
-      {/*data.map(data => <Item styleRec={styles.recComp1} styleMiniRec={styles.miniRecComp1} val={[data.title,data.price]}></Item>)*/}
+          <View style={styles.mid}>
+
+          
+            {test()}
+
+          </View>
 
 
-      </View>
 
-      
-      
-    </View>
-    
-    
-  </ScrollView>
-  <View >
+        </View>
+
+
+      </ScrollView>
+      <View style={styles.footer} >
         {/*() => db.toLogin(login, password, navigation, myTextInput, myTextInput2, () => { setLogin(" "), setPassword(" ") })*/}
         {/*<TouchableHighlight style={styles.testBtn} ><Button title="Register" onPress={goToRegister} color="#9C27B0"></Button></TouchableHighlight>*/}
         <TouchableHighlight style={styles.retourBtn} ><Button title="RETOUR" color="#51355A" onPress={() => { setLoading(true) }}></Button></TouchableHighlight>
       </View>
-  </View>
+    </View>
   );
 
 }

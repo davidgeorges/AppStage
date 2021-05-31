@@ -1,24 +1,32 @@
-
 import { ActivityIndicator, Text, View, Button, TouchableHighlight, Alert, BackHandler, Image } from 'react-native';
 import * as React from 'react';
 import styles from 'C:/Users/S/Desktop/React_App_Stage/App_Stage/Styles/styleHome';
 import * as st from "../Fonctions/setItemInfo"
+import tailwind from 'tailwind-rn';
 
 
-export default function Item (props) {
+export default function Item(props) {
 
-  
-        return (
-            <View style={props.styleRec}>
-                <Text style={{ alignSelf: "center", marginTop: "1%" }}>{props.val[0]}</Text>
-                <View style={props.styleMiniRec}>
-                    <Image style={styles.logo} source={{
-                        uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-                    }} />
-                </View>
-                <Text style={{ alignSelf: "center", marginTop: "5%" }}>{props.val[1]}</Text>
+
+    return (
+
+        <View key={props.k} style={tailwind(' text-center')}>
+            <View style={tailwind('  mb-8')}>
+                <TouchableHighlight style={tailwind('mx-7 rounded-2xl')} onPress={() =>{}
+                    /*permet daller à la page Details Manga
+                    navigate('Details Manga', {
+                        id: props.manga.id,
+                        otherParam: 'anything you want here',
+                    })*/
+                }>
+                    <Image style={tailwind(' h-48 w-full rounded-2xl ')} source={{ uri: props.url }} alt={'image' + i}></Image>
+
+                </TouchableHighlight>
+                <Text style={tailwind(' text-center font-bold mt-2')}>{props.description}</Text>
             </View>
-        )
-    
+
+        </View>
+    )
+
 
 }
