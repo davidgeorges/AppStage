@@ -1,6 +1,6 @@
 
 import Home from '../Pages/Home';
-import Test from '../Pages/Test';
+import Test from '../Pages/Profile';
 import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -28,7 +28,6 @@ export function CustomDrawerContent(props) {
           </View>
         </View>
       </Drawer.Section>
-      <DrawerItemList {...props} ></DrawerItemList>
       <Drawer.Section style={{ marginTop: 10 }}>
         <DrawerItem
           icon={({ color, size }) => (

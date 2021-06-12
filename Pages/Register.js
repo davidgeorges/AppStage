@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { TextInput, Text, View, Button, TouchableHighlight, Image,Keyboard} from 'react-native';
-import styles from '../Styles/styleRegister';
-import * as db from '../Fonctions/firebaseJS';
-import { AntDesign } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
+
+/* Styles */
+import styles from '../Styles/styleRegister';
+
+/* Fonctions */
+import * as db from '../Fonctions/firebaseJS';
 import * as er from '../Fonctions/printError';
 
-
-
-
+/* Icon */
+import { AntDesign } from '@expo/vector-icons';
 
 export default function App({ navigation }) {
 
@@ -77,7 +79,7 @@ export default function App({ navigation }) {
 
       <View style={styles.bottom}>
         <View style={styles.bottomComp}>
-            <TouchableHighlight style={styles.confirm} ><Button color="#51355A" title="Confirm"  onPress={() => db.toRegister(mail, name, password,confirmPassword,username, navigation,(val) =>{if(val){setVal(er.err2);console.log("val : ",er.err2),Keyboard.dismiss()}})} disabled={( mail.length>1 && password.length>1 && confirmPassword.length>1 && name.length>1 && username.length>1 ) ? false : true}></Button></TouchableHighlight>
+            <TouchableHighlight style={styles.confirm} ><Button color="#51355A" title="Confirm"  onPress={() => db.toRegister(mail, name, password,confirmPassword,username, navigation,(val) =>{if(val.length>1){setVal(er.err2);console.log("val : ",er.err2),Keyboard.dismiss()}})} disabled={( mail.length>1 && password.length>1 && confirmPassword.length>1 && name.length>1 && username.length>1 ) ? false : true}></Button></TouchableHighlight>
             <TouchableHighlight style={styles.cancel} ><Button color="#2A0C4E" title="Cancel" onPress={goToLogin} ></Button></TouchableHighlight>
         </View>
       </View>

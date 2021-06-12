@@ -78,5 +78,18 @@ export default StyleSheet.create({
     alignSelf:"center",width: "70%",
     height: "70%",
 
-  }
+  },
+  sectionStyle:{
+    marginTop:"1%",
+    flexDirection: 'row',
+    alignSelf: 'center',
+    borderBottomWidth: 1,
+    height: 40,
+    width: width / 1.4,
+    
+   
+  },
+  input:{
+    width: width / 1.5,
+  },
 });

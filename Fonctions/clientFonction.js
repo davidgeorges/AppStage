@@ -1,8 +1,10 @@
 
 
-export var username ="DEFAULT USERNAME";
-export var name =" ";
-export var mail ="DEFAULT MAIL";
+export var username ="AzeVII";
+export var nbAnnounce = 0;
+export var usernameLowerCase ="azevii";
+export var name ="DEFAULT NAME";
+export var mail ="georges.david.jk@gmail.com";
 export var valNavigation;
 export var isLogged=false;
 
@@ -11,6 +13,10 @@ export const setNavigation= (val) =>{
   console.log("valNavigation change")
 }
 
+export const setNbAnnounce= (val) =>{
+  nbAnnounce=val;
+  console.log("nbAnnounce change")
+}
 
 
 export const setLogged= (val) =>{
@@ -23,6 +29,10 @@ export const setUsername= (val) =>{
   console.log("username change")
 }
 
+export const setUsernameLowerCase= (val) =>{
+  usernameLowerCase=val;
+  console.log("usernameLowerCase change")
+}
 
 export const setName= (val) =>{
   name=val;

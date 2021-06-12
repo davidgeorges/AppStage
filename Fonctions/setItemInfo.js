@@ -1,5 +1,4 @@
 import { set } from 'react-native-reanimated';
-import * as db from '../Fonctions/firebaseJS';
 
 
 /* Fonction pour sauvegarder les itéms récuperer */

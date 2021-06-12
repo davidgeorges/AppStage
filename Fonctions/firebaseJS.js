@@ -3,17 +3,16 @@ import firebase from 'firebase'
 import "firebase/auth";
 import "firebase/database";
 import 'firebase/firestore';
-import { Alert } from 'react-native';
+import { Alert, Switch } from 'react-native';
 import * as er from "./printError"
 import * as cl from "./clientFonction"
-import * as st from "./setItemInfo"
 
 
 
 
 
 /*Fonction pour se connecter avec nom d'utilisateur ou mail (TEST 28/05/21) , passwordReceive, navigation, myTextInput, myTextInput2, callbackF*/
-export const toLogin2 = (mailReceive, passwordReceive, navigation, myTextInput, myTextInput2, callbackClear, callbackError) => {
+export const toLogin = (mailReceive, passwordReceive, navigation, myTextInput, myTextInput2, callbackClear, callbackError) => {
 
   var mailReceiveLowerCase = mailReceive.toLowerCase();
 
@@ -86,83 +85,104 @@ export const toLogin2 = (mailReceive, passwordReceive, navigation, myTextInput, 
 }
 /* --------------------------------------------------- */
 
-/* Fonction pour s'enregistrer (MAJ 27/05/21) */
-export const toRegister = (email, name, password, confirmPassword, username, navigation, callbackError) => {
+/* Fonction pour s'enregistrer (MAJ 14/06/21 , doc crée avec le nom de l'utilisateur et tableau id en plus) */
+export const toRegister = (email, name, password, confirmPassword, username, navigation,callbackError) => {
 
-
-  var error = " ";
   var usernameLowerCase = username.toLowerCase();
   var emailLowerCase = email.toLowerCase();
 
-  isUsernameUsed(usernameLowerCase, (val) => {
-    if (usernameLowerCase.length >= 6 && usernameLowerCase.length <= 24) {
-      /* Si le nom d'utilisateur est dispo*/
-      if (!(val)) {
-        if (name.length >= 5 && name.length <= 24) {
-          if ((password === confirmPassword)) {
-            if ((password.length >= 6 && password.length <= 30)) {
-              firebase
-                .auth()
-                /*Creation du comptea avec l'adresse mail et mot de passe */
-                .createUserWithEmailAndPassword(emailLowerCase, password)
-                .then((cred) => {
-                  /* ensuite on selectionne la collection users , et on crée un documents avec l'uid de l'utilisateur */
-                  firebase
-                    .firestore()
-                    .collection("users")
-                    .doc(cred.user.uid)
-                    /* et on écrit les informations dans la collection de l'utilisateur */
-                    .set({
-                      /* nom  : valeur */
-                      username: username,
-                      usernameToLogin: usernameLowerCase,
-                      name: name,
-                      email: emailLowerCase,
-                      friends: []
-                    });
-                  /* Affichage pour montrer le bon déroulement et se redirige vers la page principale */
-                  console.log("Inscription avec succes");
-                  navigation.navigate("Login")
-                })
-                /* Affichage d'erreur */
-                .catch((e) => {
-                  er.printError2(e.code, false)
-                  callbackError(true);
+  checkValueReceive(name, password, confirmPassword, usernameLowerCase, (errorValue) => {
+      /*Si la taille est supérieur a 1 on a une erreur */
+      if (errorValue.length > 1) {
+        er.printError2(errorValue, true);
+        callbackError(errorValue);
 
-                })
-            } else {
-              er.printError2("mot-de-passe-court", true)
-              callbackError(true);
-            }
-          } else {
-            er.printError2("mot-de-passe", true)
-            callbackError(true);
-          }
-
-        } else {
-          er.printError2("nom-court-long", true)
-          callbackError(true);
-
-        }
       } else {
-        er.printError2("user-pris", true);
-        callbackError(true);
+          /* On check si le nom d'utilisateur n'est pas deja pris */
+          isUsernameUsed(usernameLowerCase, (val) => {
+              /* si il n'est pas pris */
+              if (!(val)) {
+                  firebase.auth()
+                      /*Creation du comptea avec l'adresse mail et mot de passe */
+                      .createUserWithEmailAndPassword(emailLowerCase, password)
+                      .then((cred) => {
+                          /* ensuite on selectionne la collection users , et on crée un documents avec l'uid de l'utilisateur */
+                          firebase
+                              .firestore()
+                              .collection("users")
+                              .doc(usernameLowerCase)
+                              /* et on écrit les informations dans la collection de l'utilisateur */
+                              .set({
+                                  /* nom  : valeur */
+                                  username: username,
+                                  usernameToLogin: usernameLowerCase,
+                                  name: name,
+                                  email: emailLowerCase,
+                                  announce: []
+                              });
+                          /* Affichage pour montrer le bon déroulement et se redirige vers la page principale */
+                          console.log("Inscription avec succes");
+                          navigation.navigate("Login")
+                      })
+                      /* Affichage d'erreur */
+                      .catch((e) => {
+                          console.log("Err : ", e.code);
+                          er.printError2(e.code, false)
+                          callbackError(e.code);
 
+                      })
+              }else{
+                var error = "user-pris"
+                er.printError2(error, true)
+                callbackError(error);
+              }
+
+          })
       }
-    } else {
-      er.printError2("user-court-long", true);
-      callbackError(true);
-
-    }
-
   })
 
-
-
-};
+}
 /* --------------------------------------------------- */
 
-/*Fonction pour se deconnecter */
+/*Fonction pour se deconnecter (TEST 14/06/21)*/
+function checkValueReceive(name, password, confirmPassword, usernameLowerCase, callback) {
+
+  var error = ""
+
+ 
+
+  /* On vérifie si les données sont saisie correctement ( sauf l'adresse mail car gérer par firebase ) */
+  if (usernameLowerCase.length >= 6 && usernameLowerCase.length <= 24) {
+      if (name.length >= 5 && name.length <= 24) {
+          if ((password === confirmPassword)) {
+              if ((password.length >= 6 && password.length <= 30)) {
+
+              }
+              else {
+                  error = "mot-de-passe-court"
+              }
+          }
+          else {
+              error = "mot-de-passe-different"
+          }
+      }
+      else {
+          error = "nom-court-long"
+      }
+  }
+  else {
+      error = "user-court-long"
+  }
+
+  //er.printError2(error, true);
+  console.log("err :",error)
+  callback(error);
+
+}
+/* --------------------------------------------------- */
+
+
+/*Fonction pour se deconnecter (TEST 29/05/21)*/
 export const toLogOut = () => {
 
   // on demande a l'utilisateur si il veut quitter avec une alert
@@ -188,7 +208,6 @@ export const toLogOut = () => {
             })
             .catch((error) => {//Si on n'a pas réussi on fait un affichage
               console.log(error);
-              er.printError(error);
 
             })
         }
@@ -201,7 +220,7 @@ export const toLogOut = () => {
 /* --------------------------------------------------- */
 
 
-/* Fonction pour savoir si le nom d'utilisateur existe deja */
+/* Fonction pour savoir si le nom d'utilisateur existe deja (TEST 29/05/21)*/
 export const isUsernameUsed = (username, callback) => {
 
   firebase.firestore().collection("users").where("usernameToLogin", "==", username).get()
@@ -228,7 +247,7 @@ export const isUsernameUsed = (username, callback) => {
 }
 /* --------------------------------------------------- */
 
-/* Fonction pour récuperer l'adresse mail avec le nom d'utilisateur */
+/* Fonction pour récuperer l'adresse mail avec le nom d'utilisateur(TEST 03/06/21)*/
 export const getMail = (username, callback) => {
 
   firebase.firestore().collection("users").where("usernameToLogin", "==", username).get()
@@ -252,8 +271,134 @@ export const getMail = (username, callback) => {
 }
 /* --------------------------------------------------- */
 
+/* Fonction pour récuperer tout les info si on est connecter (TEST 03/06/21)*/
+export const getAllInfo = (mail, callback) => {
 
-var tab = [];
+  firebase.firestore().collection("users").where("email", "==", mail).get()
+    .then((querySnapshot) => {
+      if (querySnapshot.size > 0) {
+        querySnapshot.forEach((doc) => {
+
+          console.log("Info recuperer :", mail);
+          callback(doc.data());
+
+        })
+      } else {
+        console.log("Info non recuperer ( inexistant ) :", mail);
+        callback('');
+      }
+    })
+    .catch((error) => {
+
+      console.log("Erreur lors de la recherche de l'adresse mail : ", error);
+      callback('');
+    });
+}
+/* --------------------------------------------------- */
+
+
+/*Recuperer les articles de la  catégories (TEST 10/06/21)*/
+export const getArticle = (tab, chaineReceive, cl) => {
+
+  //  firebase.firestore().collection("ensemble_Article").orderBy("rank","desc").get()
+
+  var i = 0;
+  /* Recuperation de tout les articles */
+  firebase.firestore().collection(chaineReceive).get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        tab.push(doc.data());
+        console.log("doc ", ++i, ": ", doc.data());
+
+      }), cl();
+    }).catch((error) => {
+      console.error(error);
+    });
+
+}
+
+/*Recuperer les articles de l'utilisateur (TEST 10/06/21)*/
+export const getUserArticle = (tab, chaineReceive, usernameReceive, callback) => {
+
+  //  firebase.firestore().collection("ensemble_Article").orderBy("rank","desc").get()
+
+  var i = 0;
+  /* Recuperation de tout les articles */
+
+  firebase.firestore().collection(chaineReceive).where("name", "==", usernameReceive).get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+
+        tab.push(doc.data());
+        console.log("doc ", ++i, ": ", doc.data());
+        cl.setNbAnnounce(i)
+
+      }), callback();
+    }).catch((error) => {
+      console.error(error);
+    });
+
+
+}
+
+/* Ajouter une Annonce dans la db (TEST 10/06/21) */
+export const addAnnounce = (titleReceive, descriptionReceive, whereAdd, callbackError) => {
+
+  if ((titleReceive.length >= 6 && titleReceive.length <=24)) {
+    if ((descriptionReceive.length >= 6 && descriptionReceive.length <=255)) {
+      isAnnounceTitleUsed(titleReceive, (val) => {
+        /* si le titre  d'annonce est disponible et que l'utilisateur n'a pas deja 3 annonces*/
+        if (!(val) && cl.nbAnnounce < 3) {
+          /* On check si les données sont correctement saisie */
+          /* Ajout des info dans firestore */
+         
+        }
+      })
+    }else{
+    console.log("Error input value")
+    er.printError2("descrip-mal-formate", true)
+    callbackError(true)
+    }
+  } else {
+    console.log("Error input value")
+    er.printError2("titre-mal-formate", true)
+
+    callbackError(true)
+
+  }
+
+
+
+}
+/* --------------------------------------------------- */
+
+/* Fonction pour savoir si le Titre de l'annonce est deja pris par l'utilisateur (TEST 11/06/21)*/
+export const isAnnounceTitleUsed = (titleToCheck, callback) => {
+
+  /* On check dans le tableau stocké dans la section du client si le nom de l'annonce est deja utilisé par le même client*/
+  firebase.firestore().collection("users").doc(cl.usernameLowerCase).get()
+    .then((doc) => {
+      console.log("Cached document data:", doc.data().announce);
+      /* si la valeur est dans le tableau on ne crée pas l'annonce ( false ) */
+      if (doc.data().announce.indexOf(titleToCheck) !== -1) {
+        console.log("Titre d'annonce indisponible")
+        callback(true)
+      }
+      /* callback avec bool a false  le nom de l'annonce est disponible */
+      else {
+        callback(false)
+        console.log("Titre d'annonce disponible")
+      }
+    })
+    .catch((error) => {
+
+      console.log("Erreur lors de la recherche de l'utilisateur' : ", error);
+      callback('');
+    });
+}
+/* --------------------------------------------------- */
+
+
 /* Fonction pour stocker les info  récuperer dans notre fonction client  */
 export const setInfo = (mail) => {
 
@@ -283,71 +428,3 @@ const goToHome = (navigation) => {
 
 }
 /* --------------------------------------------------- */
-
-/* Fonction pour récuperer tout les info si on est connecter */
-export const getAllInfo = (mail, callback) => {
-
-  firebase.firestore().collection("users").where("email", "==", mail).get()
-    .then((querySnapshot) => {
-      if (querySnapshot.size > 0) {
-        querySnapshot.forEach((doc) => {
-
-          console.log("Info recuperer :", mail);
-          callback(doc.data());
-
-        })
-      } else {
-        console.log("Info non recuperer ( inexistant ) :", mail);
-        callback('');
-      }
-    })
-    .catch((error) => {
-
-      console.log("Erreur lors de la recherche de l'adresse mail : ", error);
-      callback('');
-    });
-}
-/* --------------------------------------------------- */
-
-/* Fonction pour récuperer un set d'item */
-export const getSetItem = (item,callback) => {
-
-  
-  var i = 0;
-  firebase.firestore().collection("items").doc("week1").collection("set1").get()
-    .then((querySnapshot) => {
-      if (querySnapshot.size > 0) {
-        querySnapshot.forEach((doc) => {
-          tab.push(doc.data());
-          ++i
-          console.log("set d'ITEM recuperer : ", doc.data().title, " price : ", doc.data().price, " : ", "item" + i.toString());
-          st.saveItem("item" + i.toString(), doc.data());
-
-        }),callback(tab)
-      } else {
-        console.log("ITEM non recuperer (  ) :", item);
-
-      }
-    })
-    .catch((error) => {
-
-      console.log("Erreur lors de la recherche du set d'item : ", error);
-
-    });
-}
-/* --------------------------------------------------- */
-
-export const dd = () =>{
-  const dbRef = firebase.database().ref();
-
-  dbRef.child("Aticle_Ensemble").get().then((snapshot) => {
-    if (snapshot.exists()) {
-      console.log(snapshot.val());
-    } else {
-      console.log("No data available");
-    }
-  }).catch((error) => {
-    console.error(error);
-  });
-  
-}

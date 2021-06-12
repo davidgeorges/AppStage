@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Dimensions, ImageBackground } from 'react-native';
 
 
+
+
 export const { width, height } = Dimensions.get("screen");
 
 export default StyleSheet.create({
@@ -33,7 +35,8 @@ export default StyleSheet.create({
     width:"40%",
     height:"100%",
     marginRight:"7%",
-    borderRadius: 5 ,
+    borderTopRightRadius: 5 ,
+    borderBottomRightRadius: 5,
     marginLeft:"7%",
     backgroundColor:"#51355A",
     justifyContent: 'center',
@@ -44,7 +47,8 @@ export default StyleSheet.create({
   boxRightSide :{
     width:"40%",
     height:"100%",
-    borderRadius: 5 ,
+    borderTopLeftRadius: 5 ,
+    borderBottomLeftRadius: 5,
     backgroundColor:"#51355A",
     justifyContent: 'center',
     alignItems: 'center',

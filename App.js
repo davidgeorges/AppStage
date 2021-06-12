@@ -5,16 +5,22 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
-import Test from './Pages/Test';
+import Test from './Pages/Profile';
 import Home from './Pages/Home';
-import Option from './Pages/Option';
-import * as db from './Fonctions/firebaseJS';
-import * as drawer from './Pages/Drawer'
+import Setting from './Pages/Setting';
+import Design from './Pages/Design'
+import Informatique from './Pages/Informatique'
+import Announce from './Pages/Announce'
+
+
+import ProductDetails from './Pages/ProductDetails';
+import * as drawer from './Components/Drawer'
 import firebase from 'firebase'
 import "firebase/auth";
 import "firebase/database";
 import 'firebase/firestore';
 import { Ionicons } from '@expo/vector-icons';
+import TabNavigator from "../App_Stage/Navigation/TabNavigator";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -39,10 +45,12 @@ const MainPagesDrawer = () => {
       <Drawer.Screen name="Home"  component={Home} options={{ headerShown: false }} />
       <Drawer.Screen name="Test" component={Test} options={{ headerShown: false }} />
       <Drawer.Screen name="Option" component={Option} options={{ headerShown: false,drawerIcon:({focused,color,size})=>{
-          <Ionicons name="home-outline" style={{size:{size}, color:{color}}}/> }}} />
+      <Ionicons name="home-outline" style={{size:{size}, color:{color}}}/> }}} />
     </Drawer.Navigator>
   )
 }
+
+
 
 function App() {
 
@@ -62,7 +70,12 @@ function App() {
       <Stack.Navigator initialRouteName="Login" >
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
-        <Stack.Screen name="MainPagesDrawer" component={MainPagesDrawer} options={{ headerShown: false }} />
+        <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
+        <Stack.Screen name="ProductDetails" component={ProductDetails} options={{ headerShown: false }} />
+        <Stack.Screen name="Design" component={Design} options={{ headerShown: false }} />
+        <Stack.Screen name="Informatique" component={Informatique} options={{ headerShown: false }} />
+        <Stack.Screen name="Announce" component={Announce} options={{ headerShown: false }} />
+
         {/*<Stack.Screen name="Home" component={Home} options={{ headerShown: false }}/>
         <Stack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
         <Stack.Screen name="Option" component={Option} options={{ headerShown: false }}/>*/}
@@ -70,5 +83,8 @@ function App() {
     </NavigationContainer >
   );
 }
+
+
+
 
 export default App;
