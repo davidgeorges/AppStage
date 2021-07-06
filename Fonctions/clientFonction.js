@@ -1,21 +1,41 @@
-
-
-export var username ="AzeVII";
-export var nbAnnounce = 0;
-export var usernameLowerCase ="azevii";
+export var currentUser = null;
+export var username ="DEFAULT USERNAME";
+export var nbArticle = 0;
+export var usernameLowerCase ="DEFAULT NAME";
 export var name ="DEFAULT NAME";
-export var mail ="georges.david.jk@gmail.com";
+export var mail ="DEFAULT MAIL";
 export var valNavigation;
 export var isLogged=false;
+export var id = " ";
+
+/* Description */
+
+
+
+/* ------------ */
+
+export const getId = () =>{
+  return id;
+}
+
+export const setId= (val) =>{
+  id=val;
+  console.log("Id changed to : " ,currentUser)
+}
+
+export const setCurrentUser= (val) =>{
+  currentUser=val;
+  console.log("currentUser " ,currentUser)
+}
 
 export const setNavigation= (val) =>{
   valNavigation=val;
-  console.log("valNavigation change")
+  console.log("Changed page to : ")
 }
 
-export const setNbAnnounce= (val) =>{
-  nbAnnounce=val;
-  console.log("nbAnnounce change")
+export const setNbArticle= (val) =>{
+  nbArticle=val;
+  console.log("nbArticle change to :",val)
 }
 
 
@@ -26,21 +46,21 @@ export const setLogged= (val) =>{
 
 export const setUsername= (val) =>{
   username=val;
-  console.log("username change")
+  console.log("username change to :",val)
 }
 
 export const setUsernameLowerCase= (val) =>{
   usernameLowerCase=val;
-  console.log("usernameLowerCase change")
+  console.log("usernameLowerCase change to :",val)
 }
 
 export const setName= (val) =>{
   name=val;
-  console.log("name change")
+  console.log("name change to :",val)
 }
 
 export const setMail= (val) =>{
   mail=val;
-  console.log("mail change")
+  console.log("mail change to :",val)
 }
 

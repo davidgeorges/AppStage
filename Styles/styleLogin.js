@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get("screen");
 export default StyleSheet.create({
   image: {
     height: "100%",
-    backgroundColor:"#FFF8F0"
+    backgroundColor:"white"
     
   },
   title: {
@@ -66,6 +66,16 @@ export default StyleSheet.create({
   register: {
     width: width / 1.4,
   },
+  shadow: {
+    shadowColor:"#7F5DF0",
+    shadowOffset:{
+      width:0,
+      height:10,
+    },
+    shadowOpacity:0.25,
+    shadowRadius:3.5,
+    elevation:5
 
+  }
 
 });

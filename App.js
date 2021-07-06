@@ -1,30 +1,32 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import SplashScreen from './Pages/SplashScreen';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
-import Test from './Pages/Profile';
-import Home from './Pages/Home';
-import Setting from './Pages/Setting';
 import Design from './Pages/Design'
+import VideoGame from './Pages/VideoGame'
+import Sport from './Pages/Sport'
 import Informatique from './Pages/Informatique'
-import Announce from './Pages/Announce'
-
-
+import Article from './Pages/Article'
 import ProductDetails from './Pages/ProductDetails';
-import * as drawer from './Components/Drawer'
+import ProductDetailsModify from './Pages/ProductDetailsModify';
+import { YellowBox } from "react-native";
+
+
+/* Firebase */
 import firebase from 'firebase'
 import "firebase/auth";
 import "firebase/database";
 import 'firebase/firestore';
-import { Ionicons } from '@expo/vector-icons';
+
+
+/* Navigation */
 import TabNavigator from "../App_Stage/Navigation/TabNavigator";
 
+/* Var pour la navigation */
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
-
 
 /* Confirugration database (OK 19/05/21) */
 export const firebaseConfig = {
@@ -39,52 +41,37 @@ export const firebaseConfig = {
 };
 /* --------------------------------------------------- */
 
-const MainPagesDrawer = () => {
-  return (
-    <Drawer.Navigator initialRouteName="Home"   drawerContent={(props) => <drawer.CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Home"  component={Home} options={{ headerShown: false }} />
-      <Drawer.Screen name="Test" component={Test} options={{ headerShown: false }} />
-      <Drawer.Screen name="Option" component={Option} options={{ headerShown: false,drawerIcon:({focused,color,size})=>{
-      <Ionicons name="home-outline" style={{size:{size}, color:{color}}}/> }}} />
-    </Drawer.Navigator>
-  )
-}
-
-
-
-function App() {
-
+function App({ navigation }) {
 
   /*Init db */
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-    firebase.firestore();
+
     console.log("Init database success");
-    
+
   } else {
     firebase.app(); // if already initialized, use that one
   }
 
+  YellowBox.ignoreWarnings([""]);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" >
+      <Stack.Navigator initialRouteName="SplashScreen" >
+        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown:false}}></Stack.Screen>
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
         <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="ProductDetails" component={ProductDetails} options={{ headerShown: false }} />
+        <Stack.Screen name="ProductDetailsModify" component={ProductDetailsModify} options={{ headerShown: false }} />
         <Stack.Screen name="Design" component={Design} options={{ headerShown: false }} />
         <Stack.Screen name="Informatique" component={Informatique} options={{ headerShown: false }} />
-        <Stack.Screen name="Announce" component={Announce} options={{ headerShown: false }} />
-
-        {/*<Stack.Screen name="Home" component={Home} options={{ headerShown: false }}/>
-        <Stack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
-        <Stack.Screen name="Option" component={Option} options={{ headerShown: false }}/>*/}
+        <Stack.Screen name="VideoGame" component={VideoGame} options={{ headerShown: false }} />
+        <Stack.Screen name="Sport" component={Sport} options={{ headerShown: false }} />
+        <Stack.Screen name="Article" component={Article} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer >
   );
 }
-
-
-
 
 export default App;

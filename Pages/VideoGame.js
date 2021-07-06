@@ -4,15 +4,13 @@ import { ActivityIndicator, View, Text,TouchableHighlight, ScrollView } from 're
 const { width, height } = Dimensions.get("screen");
 import { Dimensions } from 'react-native';
 
-
 /* Description 
 
--Page de la catégorie Design, regroupant toute les annonce de design.
+-Page de la catégorie ?, regroupant toute les annonce de ?.
 -Header annoncant le nom de la catégories.
 -Footer contenant 3 options pour se rediriger vers la catégories précédentes, vers la page principale et vers la catégories suivante.
 
  ------------ */
-
 /* Styles */
 import styles from '../Styles/styleProduct'
 
@@ -21,6 +19,7 @@ import Footer from "../Components/Footer"
 
 /* Fonctions */
 import * as db from '../Fonctions/firebaseJS';
+
 
 export default function App({navigation }) {
 
@@ -61,7 +60,7 @@ export default function App({navigation }) {
   useEffect(() => {
 
     /* Donne la navigation au client */
-    db.getArticle(tabArticle, "design_Article", () => {
+    db.getArticle(tabArticle, "game_Article", () => {
       setData(tabArticle)
       setLoading(false);
     });
@@ -80,26 +79,25 @@ export default function App({navigation }) {
     <View style={styles.image}>
 
       <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center' }}>
-        <Text style={{ alignSelf: "center", marginTop: height / 20}}>CATEGORY DESIGN</Text>
+        <Text style={{ alignSelf: "center", marginTop: height / 20}}>CATEGORY VIDEO GAMES</Text>
       </View>
-
 
       <View style={{ flex: 6, marginTop: height / 30, marginBottom: height / 8 }}>
         <ScrollView >
-
 
           {loading ? <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', backgroundColor: "white" }}>
             <ActivityIndicator style={{ width: 100, height: 65, alignSelf: "center", justifyContent: 'center', marginRight: "2.5%" }} size="large" color="orange" />
             <Text style={{ marginTop: "5%", alignSelf: "center", justifyContent: 'center', marginLeft: "2.5%" }}>Loading...</Text>
           </View> : designArticle()}
 
-        
+
+    
 
         </ScrollView>
       </View>
 
 
-      <Footer arrowLast={() => { navigation.navigate("Informatique") }} arrowNext={() => { navigation.navigate("VideoGame") }} func={() => { navigation.navigate("TabNavigator") }}></Footer>
+      <Footer arrowLast={() => { navigation.navigate("Design") }} arrowNext={() => { navigation.navigate("Sport") }} func={() => { navigation.navigate("TabNavigator") }}></Footer>
     </View>
 
 

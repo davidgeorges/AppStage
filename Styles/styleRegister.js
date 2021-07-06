@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get("screen");
 export default StyleSheet.create({
   image: {
     height: "100%",
-    backgroundColor:"#FFF8F0"
+    backgroundColor:"white"
   },
   title: {
     marginTop: "5%",

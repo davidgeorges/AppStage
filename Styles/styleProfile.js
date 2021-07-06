@@ -7,7 +7,7 @@ export default StyleSheet.create({
   image: {
     height: "100%",
     width:"100%",
-    backgroundColor:"#FFF8F0",
+    backgroundColor:"white",
 
   },
   headerBars: {
@@ -80,11 +80,11 @@ export default StyleSheet.create({
 
   },
   action: {
-    flexDirection: 'row',
+    alignSelf:"center",
+    width:"90%",
     marginTop: 10,
-    marginBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#f2f2f2',
+    borderBottomColor: 'black',
     paddingBottom: 5,
   },
 });

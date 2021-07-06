@@ -46,24 +46,24 @@ export default function App({ navigation }) {
 
 
           <View style={styles.sectionStyle}>
-            <TextInput placeholder="Username" placeholderTextColor="gray" style={styles.input} onChangeText={(username) => setUsername(username)} />
+            <TextInput  onFocus={() => { setVal("") }} placeholder="Username" placeholderTextColor="gray" style={styles.input} onChangeText={(username) => setUsername(username)} />
             <AntDesign name="user" size={18} color="black" /></View>
 
           <View style={styles.sectionStyle}>
-            <TextInput placeholder="Name" placeholderTextColor="gray" style={styles.input} onChangeText={(name) => setName(name)} />
+            <TextInput  onFocus={() => { setVal("") }} placeholder="Name" placeholderTextColor="gray" style={styles.input} onChangeText={(name) => setName(name)} />
             <AntDesign name="user" size={18} color="black" /></View>
 
           <View style={styles.sectionStyle}>
-            <TextInput secureTextEntry={true} placeholder="Password" placeholderTextColor="gray" style={styles.input} onChangeText={(password) => setPassword(password)} />
+            <TextInput  onFocus={() => { setVal("") }} secureTextEntry={true} placeholder="Password" placeholderTextColor="gray" style={styles.input} onChangeText={(password) => setPassword(password)} />
             <AntDesign name="lock" size={18} color="black" /></View>
 
             
           <View style={styles.sectionStyle}>
-            <TextInput secureTextEntry={true} placeholder="Confirm Password" placeholderTextColor="gray" style={styles.input} onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)} />
+            <TextInput onFocus={() => { setVal("") }}  secureTextEntry={true} placeholder="Confirm Password" placeholderTextColor="gray" style={styles.input} onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)} />
             <AntDesign name="lock" size={18} color="black" /></View>
 
           <View style={styles.sectionStyle}>
-            <TextInput placeholder="Mail" placeholderTextColor="gray" style={styles.input} onChangeText={(mail) => setMail(mail)} />
+            <TextInput  onFocus={() => { setVal("") }} placeholder="Mail" placeholderTextColor="gray" style={styles.input} onChangeText={(mail) => setMail(mail)} />
             <AntDesign name="mail" size={18} color="black" />
           </View>
 
@@ -79,7 +79,7 @@ export default function App({ navigation }) {
 
       <View style={styles.bottom}>
         <View style={styles.bottomComp}>
-            <TouchableHighlight style={styles.confirm} ><Button color="#51355A" title="Confirm"  onPress={() => db.toRegister(mail, name, password,confirmPassword,username, navigation,(val) =>{if(val.length>1){setVal(er.err2);console.log("val : ",er.err2),Keyboard.dismiss()}})} disabled={( mail.length>1 && password.length>1 && confirmPassword.length>1 && name.length>1 && username.length>1 ) ? false : true}></Button></TouchableHighlight>
+            <TouchableHighlight style={styles.confirm} ><Button color="#51355A" title="Confirm"  onPress={() => db.toRegister(mail, name, password,confirmPassword,username, navigation,(val) =>{if(val.length>1){setVal(er.err2);console.log("Erreur connexion : ",er.err2),Keyboard.dismiss()}})} disabled={( mail.length>1 && password.length>1 && confirmPassword.length>1 && name.length>1 && username.length>1 ) ? false : true}></Button></TouchableHighlight>
             <TouchableHighlight style={styles.cancel} ><Button color="#2A0C4E" title="Cancel" onPress={goToLogin} ></Button></TouchableHighlight>
         </View>
       </View>

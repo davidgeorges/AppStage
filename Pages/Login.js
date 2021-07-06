@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,} from 'react';
 import { TextInput, Text, View, Button, TouchableHighlight, Image, TouchableOpacity, Keyboard } from 'react-native';
 import 'react-native-gesture-handler';
 import { setStatusBarBackgroundColor } from 'expo-status-bar';
@@ -14,7 +14,6 @@ import * as er from '../Fonctions/printError';
 import styles from '../Styles/styleLogin.js';
 
 /* Icon */
-import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
 
@@ -34,10 +33,13 @@ export default function App({ navigation }) {
   const [show, setShow] = useState(false);
   const [visible, setVisible] = useState(true);
   const [val, setVal] = useState(" ");
-  setStatusBarBackgroundColor("#FFF8F0");
+
+  setStatusBarBackgroundColor("white");
+
 
 
   return (
+
 
 
 
@@ -55,12 +57,13 @@ export default function App({ navigation }) {
             <AntDesign name="user" size={18} color="black" />
           </View>
           <View style={styles.sectionStyle}>
-            <TextInput secureTextEntry={visible} ref={myTextInput2} placeholder="Password" placeholderTextColor="gray" style={styles.input}
+            <TextInput onFocus={() => { setVal("") }} secureTextEntry={visible} ref={myTextInput2} placeholder="Password" placeholderTextColor="gray" style={styles.input}
               onChangeText={(password) => { setPassword(password) }} />
             <TouchableOpacity onPress={() => { setVisible(!(visible)); setShow(!show) }}>
               <MaterialCommunityIcons name={show === false ? 'eye-off-outline' : 'eye-outline'} size={18} color="black" />
             </TouchableOpacity>
           </View>
+
 
           {val.length < 1 ? null :
             <Animatable.View animation="fadeInLeft" duration={500}>
@@ -71,7 +74,17 @@ export default function App({ navigation }) {
       </View>
       <View style={styles.bottom}>
         <View style={styles.bottomComp}>
-          <TouchableHighlight style={styles.login} ><Button title="Login" color="#51355A" onPress={() => { navigation.navigate("TabNavigator") }}></Button></TouchableHighlight>
+          <TouchableHighlight style={styles.login} ><Button title="Login" color="#51355A" disabled={(mail.length > 1 && password.length > 1) ? false : true}
+            onPress={() => {
+              db.toLogin(mail, password, navigation, myTextInput, myTextInput2, (val) => {
+                if (val) {
+                  setVal(er.err2); console.log("Erreur connexion : ", er.err2), Keyboard.dismiss()
+                }
+                else { console.log("ici lg page "), setMail(" "), setPassword(" "), setVal(" "),navigation.navigate('TabNavigator', { screen: 'Home' })}
+              
+                 
+              })
+            }}></Button></TouchableHighlight>
           <TouchableHighlight style={styles.register} ><Button title="Register" onPress={goToRegister} color="#2A0C4E" ></Button></TouchableHighlight>
         </View>
       </View>

@@ -9,6 +9,12 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
+    "@expo-google-fonts/aclonica": "^0.1.0",
+    "@expo-google-fonts/alfa-slab-one": "^0.1.0",
+    "@expo-google-fonts/inter": "^0.1.0",
+    "@expo-google-fonts/ubuntu": "^0.1.0",
+    "@react-native-async-storage/async-storage": "^1.15.5",
+    "@react-native-community/checkbox": "^0.5.8",
     "@react-native-community/hooks": "^2.6.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^11.5.0",
@@ -22,6 +28,7 @@
     "base-64": "^1.0.0",
     "chance": "^1.1.7",
     "expo": "~41.0.1",
+    "expo-font": "~9.1.0",
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
     "package.json": "^2.0.1",
@@ -37,9 +44,7 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.3.0",
     "react-native-vector-icons": "^8.1.0",
-    "react-native-web": "~0.13.12",
-    "tailwind-rn": "^3.0.1",
-    "tailwindcss": "^2.1.2"
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

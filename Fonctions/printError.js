@@ -22,7 +22,7 @@ export const printError2 = (error, manuel) => {
         err2 = "Mot de passe trop faible."
         break;
       case "auth/too-many-requests":
-        err2 = "Trop de demandes. Réessayez dans une minute."
+        err2 = "Trop de demandes " + '\n' + "Veuillez réessayer dans une minute."
         break;
       case "auth/user-not-found":
         err2 = "Utilisateur inexistant." + '\n' + "Voulez vous vous crée un compte ?"
@@ -55,10 +55,16 @@ export const printError2 = (error, manuel) => {
         err2 = "Votre titre doit comprendre" + '\n' + "entre 6 et 24 caractères."
         break;
       case "descrip-mal-formate":
-        err2 = "Votre description doit comprendre" + '\n' + "entre 6 et 255 caractères."
+        err2 = "Votre description doit comprendre" + '\n' + "entre 6 et 300 caractères."
+        break;
+      case "titre-non-disponible":
+        err2 = "Vous avez déjà un article avec ce titre."
+        break;
+      case "3-article-max":
+        err2 = "Vous avez atteint le maximum d'articles (4)."
         break;
       default:
-        err2 = "Erreur non définie."
+        err2 = "Erreur non définie." 
         break;
     }
   }

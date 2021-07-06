@@ -7,7 +7,7 @@ export default StyleSheet.create({
   image: {
     height: "100%",
     width:"100%",
-    backgroundColor:"#FFF8F0",
+    backgroundColor:"white",
 
   },
   headerBars: {
@@ -35,7 +35,7 @@ export default StyleSheet.create({
     marginRight:"7%",
     borderRadius: 5 ,
     marginLeft:"7%",
-    backgroundColor:"#51355A",
+    backgroundColor:"#9E2B25",
     justifyContent: 'center',
     alignItems: 'center',
 
@@ -45,7 +45,7 @@ export default StyleSheet.create({
     width:"40%",
     height:"100%",
     borderRadius: 5 ,
-    backgroundColor:"#51355A",
+    backgroundColor:"#9E2B25",
     justifyContent: 'center',
     alignItems: 'center',
     marginRight:"7%",
@@ -78,5 +78,29 @@ export default StyleSheet.create({
     alignSelf:"center",width: "70%",
     height: "70%",
 
-  }
+  },
+  boxLeftSide2 :{
+    width:"45%",
+    height:"100%",
+    marginLeft:"5%",
+    //backgroundColor:"#9E2B25",
+    justifyContent: 'center',
+    alignItems: 'center',
+
+
+  },
+  boxRightSide2 :{
+    width:"45%",
+    height:"100%",
+   // backgroundColor:"#9E2B25",
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight:"21%",
+    borderLeftWidth:1
+    
+
+        
+
+   
+  },
 });
