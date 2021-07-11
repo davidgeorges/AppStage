@@ -5,22 +5,22 @@ const { width, height } = Dimensions.get("screen");
 
 export default StyleSheet.create({
   image: {
-    height: "100%",
+    flex:1,
     backgroundColor:"white"
   },
   title: {
-    marginTop: "5%",
+    marginTop: "2.5%",
     alignSelf:"center",
   },
   top: {
-    flex: 2,
+    flex: 0.5,
     //backgroundColor: "red",
   },
   topComp: {
     position:"absolute",
     top:0,
     alignSelf:"center",
-    marginTop:height/14,
+    marginTop:height/18,
   },
   mid: {
     flex: 3,
@@ -33,8 +33,8 @@ export default StyleSheet.create({
 
   },
   bottom: {
-    flex: 2,
-    //backgroundColor: "green",
+    flex: 0.6,
+  //backgroundColor: "green",
   },
   bottomComp: {
     alignSelf:"center",
@@ -45,7 +45,7 @@ export default StyleSheet.create({
     height: 65,
   },
   sectionStyle:{
-    marginTop:"1%",
+    marginTop:height/50,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,

@@ -1,73 +1,77 @@
 
+
+/* Description 
+
+Fonction pour gérer les différentes erreur reçu manuellement (NEW 28/05/21 , A DEVELOPPER) */
+
+
+
 /* Fonction pour gérer les différentes erreur reçu (OK 19/05/21 , A DEVELOPPER) */
 export var err = " ";
 export var err2 = " ";
 
-
-/* Fonction pour gérer les différentes erreur reçu manuellement ( écrite par moi ) (NEW 28/05/21 , A DEVELOPPER) */
 export const printError2 = (error, manuel) => {
 
   if (!(manuel)) {
     switch (error) {
       case "auth/email-already-in-use":
-        err2 = "Adresse mail déjà utilisé."
+        err2 = "Email address already in use."
         break;
       case "username-already-in-use":
-        err2 = "Nom d'utilisateur déjà utilisé."
+        err2 = "Username already in use."
         break;
       case "auth/invalid-email":
-        err2 = "Format d'adresse mail non valide."
+        err2 = "Invalid email address format."
         break;
       case "auth/weak-password":
-        err2 = "Mot de passe trop faible."
+        err2 = "Password too weak."
         break;
       case "auth/too-many-requests":
-        err2 = "Trop de demandes " + '\n' + "Veuillez réessayer dans une minute."
+        err2 ="Too many requests,"+ '\n' +"Please try again in a minute."
         break;
       case "auth/user-not-found":
-        err2 = "Utilisateur inexistant." + '\n' + "Voulez vous vous crée un compte ?"
+        err2 = "User does not exist."+ '\n' +"Please create an account."
         break;
       case "auth/wrong-password":
-        err2 = "Mauvais mot de passe, veuillez réessayer."
+        err2 = "Wrong password, please try again."
         break;
       default:
-        err2 = "Erreur non définie."
+        err2 = "Undefined error."
         break;
     }
   } else {
     switch (error) {
       case "mot-de-passe-different":
-        err2 = "Les mots de passe ne correspondent pas."
+        err2 = "Passwords do not match."
         break;
       case "mot-de-passe-court":
-        err2 = "Votre mot de passe doit comprendre" + '\n' + "entre 6 caractères et 30 caractères."
+        err2 = "Your password must be between," + '\n' + "6 and 30 characters"
         break;
       case "nom-court-long":
-        err2 = "Votre nom doit comprendre entre " + '\n' + "5 et 24 caractères."
+        err2 = "Your name must be between,"+ '\n' +"5 and 24 characters."
         break;
       case "user-pris":
-        err2 = "Ce nom d'utilisateur est déjà utilisé."
+        err2 = "This username is already used."
         break;
       case "user-court-long":
-        err2 = "Votre nom d'utilisateur doit comprendre" + '\n' + "entre 6 et 24 caractères."
+        err2 = "Your username must be between," + '\n' + "6 and 24 characters."
         break;
       case "titre-mal-formate":
-        err2 = "Votre titre doit comprendre" + '\n' + "entre 6 et 24 caractères."
+        err2 = "Your title must be between," + '\n' + "6 and 24 characters."
         break;
       case "descrip-mal-formate":
-        err2 = "Votre description doit comprendre" + '\n' + "entre 6 et 300 caractères."
+        err2 = "Your description must be between," + '\n' + "6 and 300 characters."
         break;
       case "titre-non-disponible":
-        err2 = "Vous avez déjà un article avec ce titre."
+        err2 = "You already have an article with this title."
         break;
       case "3-article-max":
-        err2 = "Vous avez atteint le maximum d'articles (4)."
+        err2 = "You have reached," + '\n' +  "the maximum number of articles (4)."
         break;
       default:
-        err2 = "Erreur non définie." 
+        err2 = "Undefined error."
         break;
     }
   }
-  //alert(err2);
 }
   /* --------------------------------------------------- */

@@ -1,3 +1,10 @@
+
+/* Description
+
+Regroupant toute les données de l'utilisateur, setter et getter.
+
+------------ */
+
 export var currentUser = null;
 export var username ="DEFAULT USERNAME";
 export var nbArticle = 0;
@@ -8,11 +15,6 @@ export var valNavigation;
 export var isLogged=false;
 export var id = " ";
 
-/* Description */
-
-
-
-/* ------------ */
 
 export const getId = () =>{
   return id;

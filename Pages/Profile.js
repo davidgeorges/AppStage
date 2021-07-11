@@ -92,10 +92,10 @@ export default function App({ navigation }) {
   return (
 
     <View style={styles.image}>
-      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center' }}>
-        <Text style={{ alignSelf: "center", marginTop: height / 20, borderBottomWidth: 1 }}>PROFILE</Text>
+      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center',justifyContent:"center",flexDirection:"row" }}>
+        <Text style={{ alignSelf: "center",borderBottomWidth: 1 }}>PROFILE</Text>
 
-        <TouchableOpacity style={{ position: "absolute", right: 0, bottom: height / 50 }}
+        <TouchableOpacity style={{ position: "absolute", right: 0,alignSelf:"center" }}
           onPress={() => {
             db.toLogOut2(() => { })
           }}>

@@ -1,5 +1,5 @@
-import React, { useEffect,} from 'react';
-import {Text, View,BackHandler, Image,TouchableOpacity } from 'react-native';
+import React, { useEffect, } from 'react';
+import { Text, View, BackHandler, Image, TouchableOpacity, SafeAreaProvider, SafeAreaView } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { setStatusBarBackgroundColor } from 'expo-status-bar';
 import { Dimensions } from 'react-native';
@@ -63,16 +63,16 @@ export default function App({ navigation }) {
 
     <View style={styles.image}>
 
-      <View style={{ flex: 1, backgroundColor: 'white', height: height / 18, borderBottomWidth: 1, width: "90%", alignSelf: 'center'}}>
+      <View style={{ flex: 1, backgroundColor: 'white', height: height / 18, borderBottomWidth: 1, width: "90%", alignSelf: 'center',justifyContent:"center" }}>
 
         <TouchableOpacity style={{
           justifyContent: "center", alignSelf: 'center', backgroundColor: '#001242',
-          borderRadius: 40, height: height / 18, width: width / 1.6, position: "absolute",  marginTop: height / 30,
+          borderRadius: 40, height: height / 20, width: width / 1.6, position: "absolute",
         }} onPress={() => { navigation.navigate("Article") }}>
           <Ionicons style={{ alignSelf: 'center', position: "absolute", left: "5%" }} name="add-circle-outline" size={24} color="white" />
           <Text style={{ alignSelf: "center", color: "white" }}>Add an article</Text></TouchableOpacity>
 
-        
+
       </View>
 
       <View style={{ flex: 6, marginTop: "6%",/*backgroundColor:"#C78888"*/ }}>
@@ -86,10 +86,10 @@ export default function App({ navigation }) {
           <TouchableOpacity style={{
             width: "45%", height: "100%", marginLeft: "5%",/*backgroundColor:"#9E2B25",*/justifyContent: 'center', alignItems: 'center', borderBottomWidth: 1
           }} onPress={() => { navigation.navigate("Informatique") }}>
-            {width >= 575.98 ? <Image style={{ alignSelf: "center", width: width/5, height:height/7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/informatique.png')} />
-              : <Image style={{ alignSelf: "center",  width: width/3.2, height:height/7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/informatique.png')} />
+            {width >= 575.98 ? <Image style={{ alignSelf: "center", width: width / 5, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/informatique.png')} />
+              : <Image style={{ alignSelf: "center", width: width / 3.2, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/informatique.png')} />
             }
-            <Text style={{ alignSelf: "center", position: "absolute", bottom: "15%", color: "black" }}>INFO</Text>
+            <Text style={{ alignSelf: "center", position: "absolute", bottom: "15%", color: "black" }}>COMPUTING</Text>
           </TouchableOpacity>
 
 
@@ -99,8 +99,8 @@ export default function App({ navigation }) {
             // backgroundColor:"#9E2B25",
             justifyContent: 'center', alignItems: 'center', marginRight: "21%", borderLeftWidth: 1, borderBottomWidth: 1
           }} onPress={() => { navigation.navigate("Design") }}>
-            {width >= 575.98 ? <Image style={{ alignSelf: "center", width: width/5, height:height/7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/design.png')} />
-              : <Image style={{ alignSelf: "center", width: width/3.2, height:height/7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/design.png')} />
+            {width >= 575.98 ? <Image style={{ alignSelf: "center", width: width / 5, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/design.png')} />
+              : <Image style={{ alignSelf: "center", width: width / 3.2, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/design.png')} />
             }
             <Text style={{ alignSelf: "center", position: "absolute", bottom: "15%", color: "black" }}>DESIGN</Text>
           </TouchableOpacity>
@@ -112,22 +112,23 @@ export default function App({ navigation }) {
 
           {/*Catégories */}
           <TouchableOpacity style={styles.boxLeftSide2} onPress={() => { navigation.navigate("VideoGame") }} >
-            {width >= 575.98 ? <Image style={{ alignSelf: "center", width: width/5, height:height/7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/jeu-video.png')} />
-              : <Image style={{ alignSelf: "center", width: width/3.2, height:height/7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/jeu-video.png')} />
+            {width >= 575.98 ? <Image style={{ alignSelf: "center", width: width / 5, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/jeu-video.png')} />
+              : <Image style={{ alignSelf: "center", width: width / 3.2, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/jeu-video.png')} />
             }
-            <Text style={{ alignSelf: "center", position: "absolute", bottom: "15%", color: "black" }}>VIDEO GAME</Text>
+            <Text style={{ alignSelf: "center", position: "absolute", bottom: "15%", color: "black" }}>VIDEO GAMES</Text>
           </TouchableOpacity>
 
 
           <TouchableOpacity style={styles.boxRightSide2} onPress={() => { navigation.navigate("Sport") }}>
-            {width >= 575.98 ? <Image style={{ alignSelf: "center", width: width/5, height:height/7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/sport.png')} />
-              : <Image style={{ alignSelf: "center", width: width/3.2, height:height/7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/sport.png')} />
+            {width >= 575.98 ? <Image style={{ alignSelf: "center", width: width / 5, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/sport.png')} />
+              : <Image style={{ alignSelf: "center", width: width / 3.2, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/sport.png')} />
             }
             <Text style={{ alignSelf: "center", position: "absolute", bottom: "15%", color: "black" }}>SPORT</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
+
   );
 
 }

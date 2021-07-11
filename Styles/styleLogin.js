@@ -20,7 +20,7 @@ export default StyleSheet.create({
     position:"absolute",
     top:0,
     alignSelf:"center",
-    marginTop:height/14,
+    marginTop:height/18,
   },
   mid: {
     flex: 3,
@@ -48,7 +48,7 @@ export default StyleSheet.create({
 
   },
   sectionStyle: {
-    marginTop:"5%",
+    marginTop:height/50,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,

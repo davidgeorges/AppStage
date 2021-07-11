@@ -68,9 +68,9 @@ export default function Informatique({ navigation }) {
 
     <View style={styles.image}>
 
-      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center' }}>
+      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center',justifyContent:"center" }}>
 
-        <Text style={{ alignSelf: "center", marginTop: height / 20,}}>CATEGORY INFORMATIQUE</Text>
+        <Text style={{ alignSelf: "center",}}>COMPUTING CATEGORY</Text>
 
       </View>
 

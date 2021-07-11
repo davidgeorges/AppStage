@@ -10,7 +10,31 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /* Description 
 
-Fichier regroupant toute les fonctions qui nécéssite l'utilisatation de firebase/firestore.
+Fichier regroupant toute les fonctions qui nécéssite l'utilisatation de firebase/firestore
+
+Fonction clearAll : Suppression des données asyncstorage.
+Fonction setToken : Ajout des données asyncstorage.
+Fonction logWithMail : Connexion avec adresse mail.
+Fonction logWithUsername : Connexion avec nom d'utilisateur.
+Fonction toLogin : Regroupant logWithMail et logWithUsername.
+Fonction toRegister : Inscription d'un utilisateur.
+Fonction checkValueReceive : Check si les valeur reçu sont correctement saisie pour proceder a l'inscription.
+Fonction toLogOut : Deconnexion de l'utilisateur.
+Fonction isUsernameUsed : Check si le nom d'utilisateur est utilisé.
+Fonction getMail : Récupérer l'adresse mail d'un utilisateur.
+Fonction getAllInfo : Récupérer les infos de l'utilisateur.
+Fonction getArticle : Récupérer les article d'une categorie.
+Fonction getUserArticle : Récupérer les articles de l'utilisateur, une seul catégorie.
+Fonction getAllUserArticle : Récupérer les articles de l'utilisateur, toute catégorie.
+Fonction getNbArticle : Récupérer le nombre d'articles de l'utilisateur.
+Fonction addArticle : Ajout d'un article.
+Fonction isArticleTitleUsed : Check si le titre de l'article est deja utiliser par l'utilisateur.
+Fonction setInfo : Initialiser les valeur de nos variables dans clientFonction avec les valeurs récupérer par getAllInfo.
+Fonction updateValue : Mettre a jour les valeurs lors de suppression d'article.
+Fonction delArticle : Suppression d'un article.
+Fonction resetClientData : Reset les données de l'utilisateur, lors d'une deconnexion.
+
+*/
 
 /* A TESTER 30/06/21  */
 const clearAll = async () => {
@@ -97,7 +121,7 @@ const logWithUsername = (usernameReceiveLowerCase, passwordReceive, isLoginFaile
 
 
 /*Fonction pour se connecter avec nom d'utilisateur ou mail (TEST OK 24/06/21) , passwordReceive, navigation, myTextInput, myTextInput2, callbackF*/
-export const toLogin = (loginReceive, passwordReceive, navigation, myTextInput, myTextInput2, callback) => {
+export const toLogin = (loginReceive, passwordReceive, callback) => {
 
   var loginReceiveLowerCase = loginReceive.toLowerCase();
 
@@ -111,7 +135,7 @@ export const toLogin = (loginReceive, passwordReceive, navigation, myTextInput, 
 
         console.log("Ici ")
         /* Appel a la fonction regroupant la fonction pour clear les text input , pour stocker les info reçu et aller a la page home */
-        groupeFunction(myTextInput, myTextInput2, loginReceiveLowerCase, navigation)
+        setInfo(mailReceive);
         callback(failedLogin)
 
       } else {
@@ -132,7 +156,7 @@ export const toLogin = (loginReceive, passwordReceive, navigation, myTextInput, 
 
         console.log("Ici ")
         /* Appel a la fonction regroupant la fonction pour clear les text input , pour stocker les info reçu et aller a la page home */
-        groupeFunction(myTextInput, myTextInput2, mailReceive, navigation)
+        setInfo(mailReceive);
         callback(failedLogin)
 
       } else {
@@ -263,7 +287,6 @@ export const toLogOut = (callback) => {
         onPress: () => {
           firebase.auth().signOut()
             .then((result) => {
-              //console.log(result);
               /*On met la variable a false */
               cl.setLogged(false);
               /* on récupère la  navigiation sauvergarder dans la fonction client*/
@@ -642,12 +665,12 @@ export const updateValue = (newNbArticle, TitleToRemove, callback) => {
 export const delArticle = (whereDel, idToDel, TitleToDelete, callback) => {
 
   Alert.alert(
-    'Suppression article',
-    'Voulez vous supprimer cette article ?',
+    'Delete article',
+    'Do you want to delete this article ?',
     [
-      { text: "NON", style: 'cancel', onPress: () => { console.log('on reste') } },
+      { text: "NO", style: 'cancel', onPress: () => { console.log('on reste') } },
       {
-        text: 'OUI',
+        text: 'YES',
         style: 'destructive',
         /*Si la personne a cliquer sur oui on de deconnecte */
         onPress: () => {

@@ -1,10 +1,11 @@
 import React, { useState, } from 'react';
-import { TextInput, Text, View, Keyboard, TouchableOpacity } from 'react-native';
+import { TextInput, Text, View, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView } from 'react-native';
 import * as db from '../Fonctions/firebaseJS';
 const { width, height } = Dimensions.get("screen");
 import { Dimensions } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { Picker } from '@react-native-picker/picker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 /* Description */
@@ -16,7 +17,7 @@ import { Picker } from '@react-native-picker/picker';
 import styles from '../Styles/styleAnnounce';
 
 /* Icon */
-
+import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 /* Fonctions */
@@ -48,65 +49,64 @@ export default function App({ navigation }) {
 
 
   return (
-
     <View style={styles.image}>
 
+      <View style={{ flex: 1, backgroundColor: 'white', borderBottomWidth: 1, width: "90%", alignSelf: 'center', justifyContent: "center", flexDirection: "row",paddingTop:"2%" }}>
 
 
-      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center' }}>
-        <Text style={{ alignSelf: "center", marginTop: height / 20, }}>ADD Article</Text>
+    
+        <Text style={{ alignSelf: "center", borderBottomWidth: 1 }}>ADD PROFILE</Text>
+
       </View>
 
 
+     
+        <View style={{ flex: 6, marginTop: "0%", }}>
+          <View style={{ position: "absolute", top: 0, alignSelf: "center" }}>
+            <View style={styles.sectionStyle}>
+              <TextInput onFocus={() => { setVal("") }} placeholder="Title" placeholderTextColor="gray" style={styles.input} onChangeText={(title) => setTitle(title)} />
+            </View>
 
-      <View style={{ flex: 6, marginTop: "8%", }}>
-        <View style={{ position: "absolute", top: 0, alignSelf: "center" }}>
-          <View style={styles.sectionStyle}>
-            <TextInput onFocus={() => { setVal("") }} placeholder="Title" placeholderTextColor="gray" style={styles.input} onChangeText={(title) => setTitle(title)} />
-          </View>
+            <View style={styles.sectionStyle}>
+              <TextInput multiline={true} numberOfLines={4} onFocus={() => { setVal("") }} placeholder="Description" placeholderTextColor="gray" style={styles.input} onChangeText={(description) => setDescription(description)} />
+            </View>
 
-          <View style={styles.sectionStyle}>
-            <TextInput multiline = {true}  numberOfLines = {4} onFocus={() => { setVal("") }} placeholder="Description" placeholderTextColor="gray" style={styles.input} onChangeText={(description) => setDescription(description)} />
-          </View>
 
-          
             <Picker onFocus={() => { setVal("") }} style={{ marginTop: height / 16, }}
               selectedValue={selectedValue}
               onValueChange={(itemValue) =>
                 setSelectedValue(itemValue)
               }>
-              <Picker.Item label="Info" value="info_Article" />
+              <Picker.Item label="Computing" value="info_Article" />
               <Picker.Item label="Design" value="design_Article" />
               <Picker.Item label="Video games" value="game_Article" />
               <Picker.Item label="Sport" value="sport_Article" />
             </Picker>
-          
 
-          {val.length < 1 ? null :
-            <Animatable.View animation="fadeInLeft" duration={500}>
-              <Text style={{ color: "red", marginTop: height / 60 }}>{val}</Text>
-            </Animatable.View>}
 
+            {val.length < 1 ? null :
+              <Animatable.View animation="fadeInLeft" duration={500}>
+                <Text style={{ color: "red", marginTop: height / 60 }}>{val}</Text>
+              </Animatable.View>}
+
+          </View>
         </View>
-      </View>
 
-      <View style={{ flex: 1, position: "absolute", bottom: height / 6, width: "100%" }}>
+      <View style={{ flex: 1,bottom: height / 14, width: "100%" }}>
 
         <TouchableOpacity style={{
           justifyContent: "center", alignSelf: 'center', backgroundColor: '#001242',
-          borderRadius: 40, height: height / 18, width: width / 1.6, position: "absolute", bottom: "10%"
+          borderRadius: 40, height: height / 20, width: width / 1.6, position: "absolute", bottom: height / 100
         }} onPress={() => { getCurrentDate(); db.addArticle(title, description, selectedValue, completeDate, (val) => { if (val) { setVal(er.err2); console.log("val : ", er.err2), Keyboard.dismiss() } else { navigation.navigate("TabNavigator") } }) }}>
           <Ionicons style={{ alignSelf: 'center', position: "absolute", left: "5%" }} name="add-circle-outline" size={24} color="white" />
-          <Text style={{ alignSelf: "center", color: "white" }}>ADD</Text></TouchableOpacity>
+          <Text style={{ alignSelf: "center", color: "white" }}>CONFIRM ARTICLE</Text></TouchableOpacity>
       </View>
 
       <View style={{ flex: 0.5, width: "90%", alignSelf: "center" }}>
         <Footer func={() => { navigation.navigate('TabNavigator', { screen: 'Home' }) }}></Footer>
       </View>
 
+
     </View>
-
-
-
   );
 }

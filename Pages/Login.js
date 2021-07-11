@@ -1,8 +1,9 @@
-import React, { useState,} from 'react';
-import { TextInput, Text, View, Button, TouchableHighlight, Image, TouchableOpacity, Keyboard } from 'react-native';
+import React, { useState,useEffect} from 'react';
+import { TextInput, Text, View, Button, TouchableHighlight, Image, TouchableOpacity, Keyboard,BackHandler,TouchableWithoutFeedback } from 'react-native';
 import 'react-native-gesture-handler';
 import { setStatusBarBackgroundColor } from 'expo-status-bar';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 
 import * as Animatable from 'react-native-animatable';
 
@@ -36,12 +37,30 @@ export default function App({ navigation }) {
 
   setStatusBarBackgroundColor("white");
 
+  /*Pour empecher le fait de revenir en arrière sur la page LOGIN "*/
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        BackHandler.exitApp()
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }),
+  );
+  /* ---------------------------------------------------------------------- */
+
 
 
   return (
 
 
 
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
     <View style={styles.image}>
       <View style={styles.top}>
@@ -76,7 +95,7 @@ export default function App({ navigation }) {
         <View style={styles.bottomComp}>
           <TouchableHighlight style={styles.login} ><Button title="Login" color="#51355A" disabled={(mail.length > 1 && password.length > 1) ? false : true}
             onPress={() => {
-              db.toLogin(mail, password, navigation, myTextInput, myTextInput2, (val) => {
+              db.toLogin(mail, password,(val) => {
                 if (val) {
                   setVal(er.err2); console.log("Erreur connexion : ", er.err2), Keyboard.dismiss()
                 }
@@ -89,6 +108,7 @@ export default function App({ navigation }) {
         </View>
       </View>
     </View>
+    </TouchableWithoutFeedback>
 
   );
 }

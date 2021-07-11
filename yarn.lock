@@ -6041,7 +6041,7 @@ react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.3.0, react-
 
 react-native-keyboard-aware-scroll-view@^0.9.4:
   version "0.9.4"
-  resolved "https://registry.npmjs.org/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.9.4.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.9.4.tgz#83b356062123070c4b75f57d34dd276b9dd5796a"
   integrity sha512-9Q8lxGvUdEnyL2Q0/VZdcEjHUGjm1lOAMd/3bNnhknoA7RqjJDaRGOQDhOAjVW1iwrKUct+B1old87nIsiX6iw==
   dependencies:
     prop-types "^15.6.2"

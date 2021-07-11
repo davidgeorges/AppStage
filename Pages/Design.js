@@ -79,8 +79,8 @@ export default function App({navigation }) {
 
     <View style={styles.image}>
 
-      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center' }}>
-        <Text style={{ alignSelf: "center", marginTop: height / 20}}>CATEGORY DESIGN</Text>
+      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center',justifyContent:"center" }}>
+        <Text style={{ alignSelf: "center"}}>DESIGN CATEGORY</Text>
       </View>
 
 

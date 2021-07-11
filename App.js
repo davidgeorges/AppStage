@@ -12,8 +12,9 @@ import Informatique from './Pages/Informatique'
 import Article from './Pages/Article'
 import ProductDetails from './Pages/ProductDetails';
 import ProductDetailsModify from './Pages/ProductDetailsModify';
-import { YellowBox } from "react-native";
+import { YellowBox} from "react-native";
 
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 /* Firebase */
 import firebase from 'firebase'
@@ -56,21 +57,24 @@ function App({ navigation }) {
   YellowBox.ignoreWarnings([""]);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen" >
-        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown:false}}></Stack.Screen>
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
-        <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
-        <Stack.Screen name="ProductDetails" component={ProductDetails} options={{ headerShown: false }} />
-        <Stack.Screen name="ProductDetailsModify" component={ProductDetailsModify} options={{ headerShown: false }} />
-        <Stack.Screen name="Design" component={Design} options={{ headerShown: false }} />
-        <Stack.Screen name="Informatique" component={Informatique} options={{ headerShown: false }} />
-        <Stack.Screen name="VideoGame" component={VideoGame} options={{ headerShown: false }} />
-        <Stack.Screen name="Sport" component={Sport} options={{ headerShown: false }} />
-        <Stack.Screen name="Article" component={Article} options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer >
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SplashScreen" >
+          <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }}></Stack.Screen>
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+          <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
+          <Stack.Screen name="ProductDetails" component={ProductDetails} options={{ headerShown: false }} />
+          <Stack.Screen name="ProductDetailsModify" component={ProductDetailsModify} options={{ headerShown: false }} />
+          <Stack.Screen name="Design" component={Design} options={{ headerShown: false }} />
+          <Stack.Screen name="Informatique" component={Informatique} options={{ headerShown: false }} />
+          <Stack.Screen name="VideoGame" component={VideoGame} options={{ headerShown: false }} />
+          <Stack.Screen name="Sport" component={Sport} options={{ headerShown: false }} />
+          <Stack.Screen name="Article" component={Article} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer >
+    </SafeAreaProvider>
+
   );
 }
 

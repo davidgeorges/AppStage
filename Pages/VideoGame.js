@@ -78,8 +78,8 @@ export default function App({navigation }) {
 
     <View style={styles.image}>
 
-      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center' }}>
-        <Text style={{ alignSelf: "center", marginTop: height / 20}}>CATEGORY VIDEO GAMES</Text>
+      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center',justifyContent:"center" }}>
+        <Text style={{ alignSelf: "center",}}>VIDEO GAMES CATEGORY</Text>
       </View>
 
       <View style={{ flex: 6, marginTop: height / 30, marginBottom: height / 8 }}>
