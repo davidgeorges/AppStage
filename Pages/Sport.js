@@ -14,31 +14,46 @@ import Footer from "../Components/Footer"
 import * as db from '../Fonctions/firebaseJS';
 
 
+/* Description 
+
+-Page de la catégorie sport, regroupant toute les annonce de port.
+-Header : annoncant le nom de la catégories.
+-Footer : contenant 3 options pour se rediriger vers la catégories précédentes, vers la page principale et vers la catégories suivante.
+
+------------ */
+
+
 export default function App({ navigation }) {
 
-
+  /* Fonction qui va itérer sur le tableau tabArticle en utilisant la méthode .map et inserer dans le deuxième tableau un élément <TouchableHighligt> avec d'aute element a l'intérieur */
   const designArticle = () => {
+
+    /* tableau qui va contenir tout les  articles de la catégorie ( <TouchableHighlight> ) */
     let listDesignArticle = [];
 
-    data.map((data, i) => {
+    data.map((dataReady, i) => {
 
+      /* on insert dans le tableau notre article ( composant )*/
       listDesignArticle.push(
 
+        /*Lorsque on clique sur notre article nous allons nous rediriger vers la page de ProductDetails en lui passant deux paramètres */
         <TouchableHighlight key={i} style={{ borderRadius: 5, width: "90%", height: height / 14, backgroundColor: '#001242', alignSelf: "center", justifyContent: "center", marginBottom: height / 34 }} onPress={() => {
-          navigation.navigate('ProductDetails', { id: data.id, data: data })
+          navigation.navigate('ProductDetails', { id: dataReady.id, data: dataReady })
         }}>
           <View >
-            <Text style={{ color: "#F5F8DE", alignSelf: "center", }}>Title : {data.titleToShow} </Text>
-            <Text style={{ color: "#F5F8DE", alignSelf: "center", }}>By : {data.usernameToShow} </Text>
+            <Text style={{ color: "#F5F8DE", alignSelf: "center", }}>Title : {dataReady.titleToShow} </Text>
+            <Text style={{ color: "#F5F8DE", alignSelf: "center", }}>By : {dataReady.usernameToShow} </Text>
 
           </View>
         </TouchableHighlight>
       )
     })
-    //console.log("'Ar : ",lstArticle)
+
+    /*Tableau qui regroupe tout les articles de la catégorie ( <TouchableHighlight> ) */
     return listDesignArticle
   }
 
+  /* Variable qui va contenir les différent données d'article pour le .map*/
   var tabArticle = [];
 
   /* useState */

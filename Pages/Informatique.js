@@ -4,6 +4,15 @@ import { ActivityIndicator, View, Text, TouchableHighlight, ScrollView } from 'r
 const { width, height } = Dimensions.get("screen");
 import { Dimensions } from 'react-native';
 
+
+/* Description 
+
+-Page de la catégorie informatique, regroupant toute les annonce d'informatique.
+-Header : annoncant le nom de la catégories.
+-Footer : contenant 3 options pour se rediriger vers la catégories précédentes, vers la page principale et vers la catégories suivante.
+
+------------ */
+
 /* Styles */
 import styles from '../Styles/styleProduct'
 
@@ -16,29 +25,36 @@ import * as db from '../Fonctions/firebaseJS';
 
 export default function Informatique({ navigation }) {
 
-
-  const infoArticle = () => {
+    /* Fonction qui va itérer sur le tableau tabArticle en utilisant la méthode .map et inserer dans le deuxième tableau un élément <TouchableHighligt> avec d'aute element a l'intérieur */
+    const infoArticle = () => {
+    
+    /* tableau qui va contenir tout les  articles de la catégorie ( <TouchableHighlight> ) */
     let listInfoArticle = [];
 
-    data.map((data, i) => {
+    
+    data.map((dataReady, i) => {
 
+      /* on insert dans le tableau notre article ( composant )*/
       listInfoArticle.push(
 
+        /*Lorsque on clique sur notre article nous allons nous rediriger vers la page de ProductDetails en lui passant deux paramètres */
         <TouchableHighlight key={i} style={{ borderRadius: 5, width: "90%", height: height / 14, backgroundColor: '#001242', alignSelf: "center", justifyContent: "center", marginBottom: height / 34 }} onPress={() => {
-          navigation.navigate('ProductDetails', { id: data.id, data: data })
+          navigation.navigate('ProductDetails', { id: dataReady.id, data: dataReady })
         }}>
           <View >
-            <Text style={{ color: "#F5F8DE", alignSelf: "center", }}>Title : {data.titleToShow} </Text>
-            <Text style={{ color: "#F5F8DE", alignSelf: "center", }}>By : {data.usernameToShow} </Text>
+            <Text style={{ color: "#F5F8DE", alignSelf: "center", }}>Title : {dataReady.titleToShow} </Text>
+            <Text style={{ color: "#F5F8DE", alignSelf: "center", }}>By : {dataReady.usernameToShow} </Text>
 
           </View>
         </TouchableHighlight>
       )
     })
-    //console.log("'Ar : ",lstArticle)
+
+    /*Tableau qui regroupe tout les articles de la catégorie ( <TouchableHighlight> ) */
     return listInfoArticle
   }
 
+  /* Variable qui va contenir les différent données d'article pour le .map*/
   var tabArticle = [];
 
   /* useState */
@@ -52,7 +68,7 @@ export default function Informatique({ navigation }) {
   /* USE EFFECT */
   useEffect(() => {
 
-    /* Donne la navigation au client */
+    /* Récupère les articles de la catégorie, crée les composant cliquable et met fin au chargement */
     db.getArticle(tabArticle, "info_Article", () => {
       setData(tabArticle)
       setLoading(false);

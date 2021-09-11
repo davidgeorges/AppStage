@@ -6,9 +6,18 @@ const { width, height } = Dimensions.get("screen");
 import { Dimensions } from 'react-native';
 
 
-/* Description */
+/* Description 
 
-/* ------------ */
+-Page Profile
+-Header : Titre de la page  et boutton deconnexion 
+-Contenu: 3 text , contenant Username,Mail et Article
+-Footer : -Footer : contenant 2 option pour se rediriger vers la page profile et home 
+
+------------ */
+
+
+
+
 
 /* Icon */
 import { FontAwesome } from '@expo/vector-icons';
@@ -33,23 +42,26 @@ export default function App({ navigation }) {
   const [data, setData] = useState([]);
 
 
-  /* Creation des view selon le nombre d'annonce */
+  /* Fonction qui va itérer sur le tableau tabArticle en utilisant la méthode .map et inserer dans le deuxième tableau un élément <TouchableHighligt> avec d'aute element a l'intérieur */
   const profileArticle = () => {
+
+    /* tableau qui va contenir tout les  articles de la catégorie ( <TouchableHighlight> ) */
     let listProfileArticle = [];
 
-    data.map((data, i) => {
+    data.map((dataReady, i) => {
 
+      /* on insert dans le tableau notre article ( composant )*/
       listProfileArticle.push(
 
+                /*Lorsque on clique sur notre article nous allons nous rediriger vers la page de ProductDetailsModify en lui passant un paramètre */
         <TouchableHighlight key={i} style={{ borderRadius: 5, width: "90%", height: height / 22, backgroundColor: '#001242', alignSelf: 'center', justifyContent: "center", marginBottom: height / 34, }} 
         onPress={() => {
-          navigation.navigate('ProductDetailsModify', { data: data })
-          //setLoading(true)
+          navigation.navigate('ProductDetailsModify', { data: dataReady })
         }}>
 
           <View>
             <View style={{ flexDirection: "row", alignSelf: "center" }}>
-              <Text style={{ color: "#F5F8DE", }}>Title : {data.titleToShow} </Text>
+              <Text style={{ color: "#F5F8DE", }}>Title : {dataReady.titleToShow} </Text>
             </View>
 
 
@@ -58,11 +70,12 @@ export default function App({ navigation }) {
         </TouchableHighlight>
       )
     })
-    //console.log("'Ar : ",lstArticle)
+
+    /*Tableau qui regroupe tout les articles de l'utilisateur ( <TouchableHighlight> ) */
     return listProfileArticle
   }
 
-  /* Decla tab */
+  /* Variable qui va contenir les différent données d'article pour le .map*/
   var tabArticle = [];
 
   /* USE EFFECT */
@@ -87,7 +100,6 @@ export default function App({ navigation }) {
 
 
 
-  //BackHandler.removeEventListener("hardwareBackPress", backAction);
 
   return (
 
@@ -97,7 +109,7 @@ export default function App({ navigation }) {
 
         <TouchableOpacity style={{ position: "absolute", right: 0,alignSelf:"center" }}
           onPress={() => {
-            db.toLogOut2(() => { })
+            db.toLogOut(navigation)
           }}>
           <AntDesign name="login" size={24} color="black" />
         </TouchableOpacity>
@@ -151,7 +163,7 @@ export default function App({ navigation }) {
 
         <View style={{ flex: 6, marginTop: height / 30, marginBottom: height / 8 }}>
 
-        {loading ?          <ActivityIndicator size="large" color="orange" />:profileArticle()}
+        {loading ?  <ActivityIndicator size="large" color="orange" />:profileArticle()}
 
           
 

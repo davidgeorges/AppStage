@@ -1,11 +1,20 @@
+/* Import de tout ce qu'on a besoin */
 import React, { useState,useEffect} from 'react';
 import { TextInput, Text, View, Button, TouchableHighlight, Image, TouchableOpacity, Keyboard,BackHandler,TouchableWithoutFeedback } from 'react-native';
 import 'react-native-gesture-handler';
 import { setStatusBarBackgroundColor } from 'expo-status-bar';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
-
 import * as Animatable from 'react-native-animatable';
+
+/* Description 
+
+-Page pour se connecter
+-Header : logo et titre , 
+-Mid : deux text input pour recevoir les données de l'utilisateur ( nom d'utilisateur mot de passe )
+-Footer : deux bouttons , connexion et register
+
+------------ */
 
 /* Fonctions */
 import * as db from '../Fonctions/firebaseJS';
@@ -20,7 +29,9 @@ import { AntDesign } from '@expo/vector-icons';
 
 export default function App({ navigation }) {
 
+  /* Variable mail en lowercase */
   var mailS;
+
   /* Reference au TextInput */
   var myTextInput = React.createRef();
   var myTextInput2 = React.createRef();
@@ -35,22 +46,32 @@ export default function App({ navigation }) {
   const [visible, setVisible] = useState(true);
   const [val, setVal] = useState(" ");
 
+  /* On met la barre du téléphone qui contient l'heure en blanc */
   setStatusBarBackgroundColor("white");
 
-  /*Pour empecher le fait de revenir en arrière sur la page LOGIN "*/
+  /* A chaque fois qu'on ouvre cette page nous ajoutons un listener pour savoir si on appuie sur le bouton pour revenir en arrière"*/
   useFocusEffect(
+
     React.useCallback(() => {
+
+      /*Lors de l'appuie sur le bouton pour revenir on arrière on quitte l'application */
       const onBackPress = () => {
+
         BackHandler.exitApp()
+        console.log("Exit App on login page");
+
         return true;
       };
 
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
+      console.log("Add listener on login page");
 
       return () =>
-        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+   
+
     }),
+
   );
   /* ---------------------------------------------------------------------- */
 

@@ -2,48 +2,59 @@ import React, { useEffect } from 'react';
 import { Text, View,Image } from 'react-native';
 import { setInfo } from '../Fonctions/firebaseJS';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useIsFocused } from "@react-navigation/native";
+
+/* Description 
+
+-Page loading screen
+-Mid : Logo et text "Loading..."
+
+------------ */
+
 
 export default function SplashScreen({ navigation }) {
-    const isFocused = useIsFocused();
 
 
-    /* A TESTER 29/06/21  Fonction async on attend la données avec le mot clé await et ensuite on déroule le code (méthode différente des callback pour les fonction  asynchrone) */
+    /*onction async on attend la données avec le mot clé await et ensuite on déroule le code (méthode différente des callback pour les fonction  asynchrone)*/
     const readData = async () => {
 
-        // AsyncStorage prend en charge seulement les chaine de caractères JSON.parse pour convertir  d'une chaine de caractère un objet/valeur js
+        //AsyncStorage.getItem prend en charge seulement les chaine de caractères JSON.parse pour convertir une chaine de caractère en un objet/valeur js
         const userData = await AsyncStorage.getItem("userData");
         let data = JSON.parse(userData);
 
 
+        /*Si data contient aucune info on n'est pas connecter*/
         if (data == null) {
-            console.log("User LG : ", data)
-            navigation.navigate("Login")
+            
+            console.log("User LG : ");
+            navigation.navigate("Login");
 
         } else {
+
+            /*Sinon data contient les info on se connecte automatiquement*/
             navigation.navigate('TabNavigator', { screen: 'Home' });
-            setInfo(data.user.email)
-            console.log("User TB : ", data.user)
+            
+            setInfo(data.user.email);
+            console.log("User TB : ", data.user);
 
         }
-        console.log('Done.')
 
     }
+
+  
 
 
 
 
     useEffect(() => {
 
-        if (isFocused) {
+            /*on attend 700ms et on execute la fonction*/
             setTimeout(() => {
             
                 readData()
-
+                
             }, 700)
-        }
 
-    }, [isFocused])
+    },[])/*Tableau vide =  va être executer qu'une seule fois au lancement*/
 
 
     return (

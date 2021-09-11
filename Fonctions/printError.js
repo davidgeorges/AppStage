@@ -2,7 +2,10 @@
 
 /* Description 
 
-Fonction pour gérer les différentes erreur reçu manuellement (NEW 28/05/21 , A DEVELOPPER) */
+Fonction pour gérer les différentes erreur reçu manuellement (NEW 28/05/21 , A DEVELOPPER)
+
+------------ */
+
 
 
 
@@ -67,6 +70,12 @@ export const printError2 = (error, manuel) => {
         break;
       case "3-article-max":
         err2 = "You have reached," + '\n' +  "the maximum number of articles (4)."
+        break;
+      case "invalid-username-carac":
+        err2 = "Your username contains invalid characters."
+        break;
+      case "invalid-name-carac":
+        err2 = "Your name contains invalid characters."
         break;
       default:
         err2 = "Undefined error."

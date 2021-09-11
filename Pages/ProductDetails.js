@@ -4,6 +4,14 @@ const { width, height } = Dimensions.get("screen");
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import { setStatusBarBackgroundColor } from 'expo-status-bar';
 
+/* Description 
+
+-Page contenant les infos d'un article.
+-Header  : boutton pour revenir en arrière et titre article.
+-Mid : contenu de l'article.
+-Footer  : contenant 3 options pour se rediriger vers la catégories précédentes, vers la page principale et vers la catégories suivante.
+
+------------ */
 
 /* Styles */
 import styles from '../Styles/styleProductDetails';
@@ -17,7 +25,10 @@ import { Ionicons } from '@expo/vector-icons';
 export default function App({ route, navigation: { goBack }, navigation }) {
 
 
+  /*on récupère les données passer en paramètres lors du .map dans la catégorie concerner*/
   const { data } = route.params;
+  
+  /* On met la barre du téléphone qui contient l'heure en blanc */
   setStatusBarBackgroundColor("white");
 
   return (

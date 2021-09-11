@@ -1,23 +1,17 @@
+/* Import de tout ce qu'on a besoin */
 import React, { useState, } from 'react';
-import { TextInput, Text, View, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { TextInput, Text, View, Keyboard, TouchableOpacity,  } from 'react-native';
 import * as db from '../Fonctions/firebaseJS';
 const { width, height } = Dimensions.get("screen");
 import { Dimensions } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { Picker } from '@react-native-picker/picker';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
-
-/* Description */
-
-/* ------------ */
 
 
 /* Styles */
 import styles from '../Styles/styleAnnounce';
 
 /* Icon */
-import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 /* Fonctions */
@@ -26,17 +20,29 @@ import * as er from '../Fonctions/printError';
 /* Component */
 import Footer from "../Components/Footer2"
 
+/* Description  
+
+-Page Article
+-Header : annoncant le nom de la catégories.
+-Mid : 2 TextInput pour le titre et la description de l'annonce et un picker pour sélectionner la catégorie, boutton pour ajouter l'article.
+-Footer : contenant 1 option pour se rediriger vers la page home 
+
+------------ */
+
 
 export default function App({ navigation }) {
 
-  const [selectedValue, setSelectedValue] = useState("info_Article");
+  /* Decla var */
   var completeDate;
 
+  /* Hooks */
   const [title, setTitle] = useState(" ");
   const [description, setDescription] = useState(" ");
   const [val, setVal] = useState(" ");
+  const [selectedValue, setSelectedValue] = useState("info_Article");
 
 
+  /* Recupère la date actuelle */
   const getCurrentDate = () => {
 
     var date = new Date().getDate();
@@ -55,7 +61,7 @@ export default function App({ navigation }) {
 
 
     
-        <Text style={{ alignSelf: "center", borderBottomWidth: 1 }}>ADD PROFILE</Text>
+        <Text style={{ alignSelf: "center", borderBottomWidth: 1 }}>ADD ARTICLE</Text>
 
       </View>
 

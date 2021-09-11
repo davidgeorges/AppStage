@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity} from 'react-native';
 const { width, height } = Dimensions.get("screen");
 import { Dimensions } from 'react-native';
 
@@ -17,8 +17,18 @@ import { AntDesign } from '@expo/vector-icons';
 /* Fonctions */
 import * as db from '../Fonctions/firebaseJS';
 
+/* Description 
+
+-Page contenant les infos d'un article et pour supprimer l'article.
+-Header  : boutton pour revenir en arrière et supprimer article.
+-Mid : contenu de l'article.
+-Footer  : contenant 3 options pour se rediriger vers la catégories précédentes, vers la page principale et vers la catégories suivante.
+
+------------ */
+
 export default function App({ route, navigation: { goBack }, navigation }) {
 
+  /*on récupère les données passer en paramètres lors du .map dans la catégorie concerner*/
   const { data } = route.params;
 
 

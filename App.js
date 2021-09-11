@@ -18,9 +18,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 /* Firebase */
 import firebase from 'firebase'
-import "firebase/auth";
-import "firebase/database";
-import 'firebase/firestore';
 
 
 /* Navigation */

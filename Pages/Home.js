@@ -1,5 +1,5 @@
-import React, { useEffect, } from 'react';
-import { Text, View, BackHandler, Image, TouchableOpacity, SafeAreaProvider, SafeAreaView } from 'react-native';
+import React from 'react';
+import { Text, View, BackHandler, Image, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { setStatusBarBackgroundColor } from 'expo-status-bar';
 import { Dimensions } from 'react-native';
@@ -7,17 +7,16 @@ const { width, height } = Dimensions.get("screen");
 
 /* Description 
 
--Page Principal de l'application contenant les 4 catégories , ( Informatique, Design, ?, ?), section cliquable qui redirige vers la catégorie.
--Header avec un bouton qui redirige vers la page pour ajouter une annonce.
--Footer contenant 2 options pour se rediriger vers le profile ou sur la page de paramètre du compte ( et contenant la section pour se rediriger vers la page home si nous somme sur les deux autres pages).
+-Page Principal de l'application contenant les 4 catégories , ( Informatique, Design, Sport, VideoGame), section cliquable qui redirige vers la catégorie.
+-Header : avec un bouton qui redirige vers la page pour ajouter une annonce.
+-Footer : contenant 2 options pour se rediriger vers le profile ou sur la page de paramètre du compte ( et contenant la section pour se rediriger vers la page home si nous somme sur les deux autres pages).
 
- ------------ */
+------------ */
 
 /* Styles */
 import styles from '../Styles/styleHome';
 
-/* Fonctions */
-import * as cl from "../Fonctions/clientFonction"
+
 
 /* Icon */
 import { Ionicons } from '@expo/vector-icons';
@@ -30,26 +29,20 @@ export default function App({ navigation }) {
   setStatusBarBackgroundColor("");
 
 
-  /* USE EFFECT */
-  useEffect(() => {
-
-
-    cl.setNavigation(navigation);
-
-
-
-  }, []) /*Tableau vide =  va être executer qu'une seule fois au lancement*/
-  /* --------------------------------------------------------------------------- */
-
-
   /*Pour empecher le fait de revenir en arrière sur la page HOME "*/
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
+
+        BackHandler.exitApp()
+        console.log("Exit App on home page");
         return true;
       };
 
+      
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      console.log("Add listener on home page");
+
 
       return () =>
         BackHandler.removeEventListener('hardwareBackPress', onBackPress);

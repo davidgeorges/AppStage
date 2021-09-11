@@ -13,6 +13,15 @@ import * as er from '../Fonctions/printError';
 import { AntDesign } from '@expo/vector-icons';
 import { height } from '../Styles/styleAnnounce';
 
+/* Description 
+
+-Page pour s'inscrire
+-Header : logo et titre , 
+-Mid : cinq text input pour recevoir les données de l'utilisateur (Username,Name,Password,Confirm Password,Mail)
+-Footer : deux bouttons , confirm et cancel 
+
+------------ */
+
 export default function App({ navigation }) {
 
 
