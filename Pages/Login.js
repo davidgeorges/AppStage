@@ -87,7 +87,7 @@ export default function App({ navigation }) {
       <View style={styles.top}>
         <View style={styles.topComp}>
           <Image style={styles.logo} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/protesta-vector-png-.png')} />
-          <Text style={styles.title}>Welcome to my Stage Project</Text>
+          <Text style={styles.title}>Welcome to my Internship Project</Text>
         </View>
       </View>
       <View style={styles.mid}>
