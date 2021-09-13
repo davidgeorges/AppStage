@@ -25,7 +25,7 @@ export default function SplashScreen({ navigation }) {
         /*Si data contient aucune info on n'est pas connecter*/
         if (data == null) {
             
-            console.log("User LG : ");
+            console.log("User is log out \n","-------------------------------");
             navigation.navigate("Login");
 
         } else {
@@ -34,7 +34,7 @@ export default function SplashScreen({ navigation }) {
             navigation.navigate('TabNavigator', { screen: 'Home' });
             
             setInfo(data.user.email);
-            console.log("User TB : ", data.user);
+            console.log("User is already connected  : ", data.user,"\n","-------------------------------");
 
         }
 

@@ -14,39 +14,39 @@ export var id = " ";
 
 
 /* Setter pour l'id */
-export const setId= (val) =>{
-  id=val;
-  console.log("Id changed to : " ,val)
+export const setId= (valReceive) =>{
+  id=valReceive;
+  console.log("Id set to : " ,valReceive,"\n","-------------------------------")
 }
 
 
 /* Setter pour le nombre d'article */
-export const setNbArticle= (val) =>{
-  nbArticle=val;
-  console.log("nbArticle change to :",val)
+export const setNbArticle= (valReceive) =>{
+  nbArticle=valReceive;
+  console.log("nbArticle set to :",valReceive,"\n","-------------------------------")
 }
 
 /* Setter pour le nom d'utilisateur en majuscule*/
-export const setUsername= (val) =>{
-  username=val;
-  console.log("username change to :",val)
+export const setUsername= (valReceive) =>{
+  username=valReceive;
+  console.log("Username set to :",valReceive,"\n","-------------------------------")
 }
 
 /* Setter pour le nom d'utilisateur en miniscule */
-export const setUsernameLowerCase= (val) =>{
-  usernameLowerCase=val;
-  console.log("usernameLowerCase change to :",val)
+export const setUsernameLowerCase= (valReceive) =>{
+  usernameLowerCase=valReceive;
+  console.log("UsernameLowerCase set to :",valReceive,"\n","-------------------------------")
 }
 
 /* Setter pour le nom */
-export const setName= (val) =>{
-  name=val;
-  console.log("name change to :",val)
+export const setName= (valReceive) =>{
+  name=valReceive;
+  console.log("Name set to :",valReceive,"\n","-------------------------------")
 }
 
 /* Setter pour le l'adresse mail*/
-export const setMail= (val) =>{
-  mail=val;
-  console.log("mail change to :",val)
+export const setMail= (valReceive) =>{
+  mail=valReceive;
+  console.log("Mail set to :",valReceive,"\n","-------------------------------")
 }
 

@@ -39,14 +39,14 @@ cette fonction est async on attend attend la résolution d'une promesse avec le 
 const clearAll = async () => {
   try {
 
-    /* await interrompt l'exécution d'une fonction asynchrone et  attend la résolution d'une promesse ici soit la suppression des données ou la valeur null si cela échoue  */
+    /* await interrompt l'exécution d'une fonction asynchrone et  attend la résolution d'une promesse ici soit la suppression des données ou la valeur null si cela échoue */
     await AsyncStorage.clear()
 
   } catch (e) {
     // clear error
   }
 
-  console.log('Clear asyncstorage Done.')
+  console.log('Clear asyncstorage Done.\n',"-------------------------------")
 }
 /* --------------------------------------------------- */
 
@@ -56,23 +56,23 @@ const setToken = async (data) => {
   try {
 
     // AsyncStorage.setItem sauvegarde seulement les chaine de caractères, on utilise JSON.stringify pour convertir un objet/valeur js  en une chaine de caractères JSON
-    /* await interrompt l'exécution d'une fonction asynchrone et  attend la résolution d'une promesse ici soit l'ajout de données ou la valeur null si cela échoue  */
+    /* await interrompt l'exécution d'une fonction asynchrone et  attend la résolution d'une promesse ici soit l'ajout de données ou la valeur null si cela échoue */
 
     await AsyncStorage.setItem("userData", JSON.stringify(data));
 
 
   } catch (e) {
 
-    console.log("Something went wrong to set asyncstorage");
+    console.log("Something went wrong to set asyncstorage\n","-------------------------------");
 
   }
 
-  console.log("Set asyncstorage done : ", data.user.email);
+  console.log("Set asyncstorage done : ", data.user.email," \n","-------------------------------");
 }
 /* --------------------------------------------------- */
 
 
-/* Fonction pour se connecter avec le mail (TEST OK 24/06/21)*/
+/* Fonction pour se connecter avec le mail  */
 const logWithMail = (mailReceive, passwordReceive, isLoginFailed) => {
 
 
@@ -82,16 +82,16 @@ const logWithMail = (mailReceive, passwordReceive, isLoginFailed) => {
       /* callback avec paramètre a false pour dire qu'on a réussie */
       isLoginFailed(false)
 
-      /*on stock les données dans l'AsyncStorage pour la connexion automatique*/
+      /* on stock les données dans l'AsyncStorage pour la connexion automatique */
       setToken(res)
 
     })
     .catch((error) => {
 
       //affichage de l'erreur dans la console
-      console.log(error);
+      console.log(error,"\n","-------------------------------");
 
-      /*Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase)*/
+      /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase) */
       er.printError2(error.code, false);
 
       /* callback avec paramètre a true pour dire qu'on a échoué */
@@ -102,11 +102,11 @@ const logWithMail = (mailReceive, passwordReceive, isLoginFailed) => {
 }
 /* --------------------------------------------------- */
 
-/* Fonction pour se connecter avec le nom d'utilisateur (TEST OK 24/06/21)*/
+/* Fonction pour se connecter avec le nom d'utilisateur */
 const logWithUsername = (usernameReceiveLowerCase, passwordReceive, isLoginFailed) => {
 
   isUsernameUsed(usernameReceiveLowerCase, (val) => {
-    /* Si le nom d'utilisateur existe on continue*/
+    /* Si le nom d'utilisateur existe on continue */
     if ((val)) {
       /* Avec le nom d'utilisateur on récupère l'adresse mail */
       getMail(usernameReceiveLowerCase, (mailReceive) => {
@@ -117,16 +117,16 @@ const logWithUsername = (usernameReceiveLowerCase, passwordReceive, isLoginFaile
             /* callback avec paramètre a false pour dire qu'on a réussie et le mail de l"utilisateur pour recuperer les infos */
             isLoginFailed(false, mailReceive)
 
-            /*on stock les données dans l'AsyncStorage pour la connexion automatique*/
+            /* on stock les données dans l'AsyncStorage pour la connexion automatique */
             setToken(res)
 
           })
           .catch((error) => {
 
             //affichage de l'erreur dans la console
-            console.log(error);
+            console.log(error,"\n","-------------------------------");
 
-            /*Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase)*/
+            /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase) */
             er.printError2(error.code, false);
 
             /* callback avec paramètre a true pour dire qu'on a échoué */
@@ -137,7 +137,7 @@ const logWithUsername = (usernameReceiveLowerCase, passwordReceive, isLoginFaile
 
     } else {
 
-      /*Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase)*/
+      /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase) */
       er.printError2("auth/user-not-found", false);
 
       /* callback avec paramètre a true pour dire qu'on a échoué */
@@ -151,17 +151,17 @@ const logWithUsername = (usernameReceiveLowerCase, passwordReceive, isLoginFaile
 
 
 
-/*Fonction pour se connecter avec nom d'utilisateur ou mail (TEST OK 24/06/21) , passwordReceive, navigation, myTextInput, myTextInput2, callbackF*/
+/* Fonction pour se connecter avec nom d'utilisateur ou mail (TEST OK 24/06/21) , passwordReceive, navigation, myTextInput, myTextInput2, callbackF */
 export const toLogin = (loginReceive, passwordReceive, callback) => {
   var loginReceiveLowerCase = loginReceive.toLowerCase();
 
-  /* On considère qu'ont se connecte avec une adresse mail*/
+  /* On considère qu'ont se connecte avec une adresse mail */
   if (loginReceiveLowerCase.includes("@")) {
     logWithMail(loginReceiveLowerCase, passwordReceive, (failedLogin) => {
       /* si false = login success */
       if (!(failedLogin)) {
 
-        console.log("In Function LogWithMail ( in toLogin ) ")
+        console.log("In Function LogWithMail ( in toLogin ) \n","-------------------------------")
 
         /* Appel fonction pour stocker les données de l'utilisateur */
         setInfo(mailReceive);
@@ -177,13 +177,13 @@ export const toLogin = (loginReceive, passwordReceive, callback) => {
       }
     })
   }
-  /* On considère qu'ont se connecte avec un nom d'utilisateur*/
+  /* On considère qu'ont se connecte avec un nom d'utilisateur */
   else {
     logWithUsername(loginReceiveLowerCase, passwordReceive, (failedLogin, mailReceive) => {
       /* si false = login success */
       if (!(failedLogin)) {
 
-        console.log("In Fonction LogWithUsername ( in toLogin ) ")
+        console.log("In Fonction LogWithUsername ( in toLogin ) \n","-------------------------------")
 
         /* Appel fonction pour stocker les données de l'utilisateur */
         setInfo(mailReceive);
@@ -202,15 +202,15 @@ export const toLogin = (loginReceive, passwordReceive, callback) => {
 }
 /* --------------------------------------------------- */
 
-/*Fonction pour s'enregistrer (TEST OK 24/06/21 , doc crée avec le nom de l'utilisateur et tableau id en plus)*/
+/* Fonction pour s'enregistrer (TEST OK 24/06/21 , doc crée avec le nom de l'utilisateur et tableau id en plus) */
 export const toRegister = (email, name, password, confirmPassword, username, navigation, callbackError) => {
 
-  /*Variable pour stocker le nom d'utilisateur et l'adresse mail en minuscule*/
+  /* Variable pour stocker le nom d'utilisateur et l'adresse mail en minuscule */
   var usernameLowerCase = username.toLowerCase();
   var emailLowerCase = email.toLowerCase();
 
   checkValueReceive(name, password, confirmPassword, usernameLowerCase, (errorValue) => {
-    /*Si la taille est supérieur a 1 on a une erreur */
+    /* Si la taille est supérieur a 1 on a une erreur */
     if (errorValue.length > 1) {
 
       er.printError2(errorValue, true);
@@ -247,7 +247,7 @@ export const toRegister = (email, name, password, confirmPassword, username, nav
                 });
 
               /* Affichage pour montrer le bon déroulement et se redirige vers la page principale */
-              console.log("Inscription avec succes");
+              console.log("Inscription avec succes \n","-------------------------------");
               
               /* changement de page */
               navigation.navigate("Login")
@@ -256,24 +256,24 @@ export const toRegister = (email, name, password, confirmPassword, username, nav
             /* Affichage d'erreur */
             .catch((e) => {
 
-              console.log("Err : ", e.code);
+              console.log("Err : ", e.code,"\n","-------------------------------");
 
-              /*Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase)*/
+              /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase) */
               er.printError2(e.code, false)
 
-              /*Callback avec l'erreur en paramètre*/
+              /* Callback avec l'erreur en paramètre */
               callbackError(e.code);
 
             })
         } else {
 
-          /*Init manuel erreur*/
+          /* Init manuel erreur */
           var error = "user-pris"
 
-          /*Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (true = manuel)*/
+          /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (true = manuel) */
           er.printError2(error, true)
 
-          /*Callback avec l'erreur en paramètre*/
+          /* Callback avec l'erreur en paramètre */
           callbackError(error);
 
         }
@@ -285,10 +285,10 @@ export const toRegister = (email, name, password, confirmPassword, username, nav
 }
 /* --------------------------------------------------- */
 
-/*Fonction pour savoir si les valeurs saisie sont correctes (TEST OK 24/06/21)*/
+/* Fonction pour savoir si les valeurs saisie sont correctes (TEST OK 24/06/21) */
 function checkValueReceive(name, password, confirmPassword, usernameLowerCase, callback) {
 
-  /*Decla var */
+  /* Decla var */
   var error = ""
   var caracteresAccepter = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   var valueUsername = 0;
@@ -299,11 +299,10 @@ function checkValueReceive(name, password, confirmPassword, usernameLowerCase, c
   /* Pour savoir si le nom d'utilisateur contient un caractères invalide */
   for (var i = 0; i < usernameLowerCase.length; i++) {
 
-    /* Si le caractère est compris dans caracteresAccepter alors on incremente la variable (pseudo ok )*/
+    /* Si le caractère est compris dans caracteresAccepter alors on incremente la variable (pseudo ok ) */
     if (caracteresAccepter.indexOf(usernameLowerCase[i]) >= 0) {
 
       valueUsername++
-      console.log("Ici Username ( in checkValueReceive ) : ", usernameLowerCase[i])
 
     }
   }
@@ -311,11 +310,10 @@ function checkValueReceive(name, password, confirmPassword, usernameLowerCase, c
   /* Pour savoir si le nom contient un caractères invalide */
   for (var i = 0; i < name.length; i++) {
 
-    /* Si le caractère est compris dans caracteresAccepter alors on incremente la variable (pseudo ok )*/
+    /* Si le caractère est compris dans caracteresAccepter alors on incremente la variable (pseudo ok ) */
     if (caracteresAccepter.indexOf(name[i]) >= 0) {
 
       valueName++
-      console.log("Ici Name ( in checkValueReceive ) : ", name[i])
 
     }
   }
@@ -329,7 +327,7 @@ function checkValueReceive(name, password, confirmPassword, usernameLowerCase, c
             if ((password.length >= 6 && password.length <= 30)) {
 
             }
-            /*Init manuel des erreurs*/
+            /* Init manuel des erreurs */
             else {
               error = "mot-de-passe-court"
             }
@@ -354,44 +352,45 @@ function checkValueReceive(name, password, confirmPassword, usernameLowerCase, c
 
 
   /* Affichage d'erreur */
-  console.log("err :", error)
+  console.log("err :", error,"\n"," ");
 
-  /*Callback avec l'erreur en paramètre*/
+  /* Callback avec l'erreur en paramètre */
   callback(error);
 
 }
 /* --------------------------------------------------- */
 
 
-/*Fonction pour se deconnecter*/
+/* Fonction pour se deconnecter */
 export const toLogOut = (navigation) => {
 
-  // on demande a l'utilisateur si il veut quitter avec une alert
+  /* on demande a l'utilisateur si il veut quitter avec une alert */
   Alert.alert(
-    'Deconnexion',
-    'Voulez vous vous deconnecter ?',
+    'Log out',
+    'Do you want to logout ?',
     [
-      { text: "NON", style: 'cancel', onPress: () => { console.log('on reste') } },
+      { text: "NO", style: 'cancel', onPress: () => { return null } },
       {
-        text: 'OUI',
+        text: 'YES',
         style: 'destructive',
 
-        /*Si la personne a cliquer sur oui on de deconnecte */
+        /* Si la personne a cliquer sur oui on de deconnecte */
         onPress: () => {
 
           firebase.auth().signOut()
             .then(() => {
 
-              /*On reset les donnés de l'utilisateur*/
+              /* On reset les donnés de l'utilisateur */
               resetClientData();
 
-              /* et on retourne sur la page login*/
+              /* et on retourne sur la page login */
               navigation.navigate("Login");
 
             })
-            .catch((error) => {//Si on n'a pas réussi on fait un affichage
+            .catch((error) => {
 
-              console.log(error);
+              /* Si on n'a pas réussi on fait un affichage de l'erreur dans la console. */
+              console.log(error,"\n","-------------------------------");
 
             })
         }
@@ -405,27 +404,40 @@ export const toLogOut = (navigation) => {
 
 
 
-/* Fonction pour savoir si le nom existe dans le BDD (TEST OK 24/06/21)*/
+/* Fonction pour savoir si le nom d'utilisateur est déja utilisé ( si le nom existe dans le BDD ) */
 export const isUsernameUsed = (username, callback) => {
 
+  /* On cherche dans la BDD au niveau des utilisateur grâce son nom d'utilisateur et on récupère les données */
   firebase.firestore().collection("users").where("usernameToLogin", "==", username).get()
     .then(querySnapshot => {
+      /* Si les données qu'on a reçu sont supérieur a 0 le nom d'utilisateur existe */
       if (querySnapshot.size > 0) {
 
-        console.log("Nom d'utilisateur existe dans la bdd ( login username ) ( in isUsernameUsed )");
+        /* Affichage dans la console */
+        console.log("Nom d'utilisateur existe dans la bdd ( login username ) ( in isUsernameUsed ) \n","-------------------------------");
+
+        /* Callback avec la valeur true ( nom d'utilisateur existant ) */
         callback(true);
 
-      } else {
+      }
+      /* Sinon il le nom d'utilisateur n'existe pas */ 
+      else {
 
-        console.log("Nom d'utilisateur inexistant dans la bdd ( login username ) ( in isUsernameUsed )");
+        console.log("Nom d'utilisateur inexistant dans la bdd ( login username ) ( in isUsernameUsed ) \n","-------------------------------");
+
+                      
+        /* Callback avec la valeur false ( nom d'utilisateur inexistant ) */
         callback(false);
 
       }
     })
-    /* Affichage d'erreur */
+    /* On récupère l'erreur */
     .catch((e) => {
 
-      console.log(e);
+      /* Affichage dans la console */ 
+      console.log(e,"\n ","-------------------------------");
+
+     /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase) */
       er.printError2(e.code, false)
 
     })
@@ -433,53 +445,89 @@ export const isUsernameUsed = (username, callback) => {
 }
 /* --------------------------------------------------- */
 
-/* Fonction pour récuperer l'adresse mail avec le nom d'utilisateur (TEST OK 24/06/21)*/
+/* Fonction pour récuperer l'adresse mail avec le nom d'utilisateur s*/
 export const getMail = (username, callback) => {
 
+  /* On cherche dans la BDD au niveau des utilisateur grâce son nom d'utilisateur et on récupère les données */
   firebase.firestore().collection("users").where("usernameToLogin", "==", username).get()
     .then((querySnapshot) => {
+
+      /* Si les données qu'on a reçu sont supérieur a 0 le nom d'utilisateur existe */
       if (querySnapshot.size > 0) {
+        
+        /* On récupère toute les données de cette utilisateur sur notre BDD ( on itère jusqu'a ne plus rien avoir ) */
         querySnapshot.forEach((doc) => {
 
-          console.log("Mail recuperer  :", doc.data().email, ' tentative connexion ( in getMail )');
-          callback(doc.data().email);
-        })
-      } else {
+          /* On récupère le mail dans le champ depuis la BDD doc.data() récupère tout les info de l'utilisateur stocker dans LE CLOUD FIRESTORE ( BDD )*/
+          console.log("Mail recuperer  :", doc, ' tentative connexion ( in getMail ) \n',"-------------------------------");
 
-        console.log("Mail non recuperer ( inexsistant ) ! ( in getMail )");
+          /* On met la valeur dans le callback */
+          callback(doc.data().email);
+
+        })
+      } 
+      /* Si on a pas récuperer de données */ 
+      else {
+
+        /* Affichage dans la console */
+        console.log("Mail non recuperer ( inexsistant ) ! ( in getMail ) \n","-------------------------------");
+
+        /* Callback avec un caractère vide pour dire qu'on a rien reçu */
         callback('');
       }
     })
+    /* On récupère l'erreur */
     .catch((error) => {
 
-      console.log("Erreur lors de la recherche de l'adresse mail : ", error, " ( in getMail )");
+      /* Affichage dans la console */ 
+      console.log("Erreur lors de la recherche de l'adresse mail : ", error, " ( in getMail ) \n","-------------------------------");
+
+      /* Callback avec un caractère vide pour dire qu'on a rien reçu */
       callback('');
 
     });
 }
 /* --------------------------------------------------- */
 
-/* Fonction pour récuperer tout les info de l'utilisateur (TEST OK 24/06/21)*/
+
+
+/* Fonction pour récuperer tout les info de l'utilisateur grâce a son mail */
 export const getAllInfo = (mail, callback) => {
 
+  /* On cherche dans la BDD au niveau des utilisateur grâce son mail et on récupère les données */
   firebase.firestore().collection("users").where("email", "==", mail).get()
     .then((querySnapshot) => {
+      /* Si les données qu'on a reçu sont supérieur a 0 le nom d'utilisateur existe */
       if (querySnapshot.size > 0) {
+
+        /* On récupère toute les données de cette utilisateur sur notre BDD ( on itère jusqu'a ne plus rien avoir ) */
         querySnapshot.forEach((doc) => {
 
-          console.log("Info recuperer :", mail, "( in getAllInfo  )");
+          /* Affichage dans la console */ 
+          console.log("Info recuperer grace a l'email :", mail, "( in getAllInfo  ) \n","-------------------------------");
+
+          /* On met la valeur dans le callback */
           callback(doc);
 
         })
-      } else {
+      }
+      /* Si on a pas récuperer de données */ 
+      else {
 
-        console.log("Info non recuperer ( inexistant ) :", mail, "( in getAllInfo  )");
+        /* Affichage dans la console */ 
+        console.log("Info non recuperer ( inexistant ) :", mail, "( in getAllInfo  ) \n","-------------------------------");
+
+        /* Callback avec un caractère vide pour dire qu'on a rien reçu */
         callback('');
       }
     })
+    /* On récupère l'erreur */
     .catch((error) => {
 
-      console.log("Erreur lors de la recherche de l'adresse mail : ", error, "( in getAllInfo  )");
+      /* Affichage dans la console */ 
+      console.log("Erreur lors de la recherche de l'adresse mail : ", error, "( in getAllInfo  ) \n","-------------------------------");
+
+      /* Callback avec un caractère vide pour dire qu'on a rien reçu */
       callback('');
 
     });
@@ -487,49 +535,71 @@ export const getAllInfo = (mail, callback) => {
 /* --------------------------------------------------- */
 
 
-/*Recuperer les articles d'une catégorie (TEST OK 24/06/21)*/
-export const getArticle = (tab, chaineReceive, cl) => {
+/* Recuperer les articles d'une catégorie */
+export const getArticle = (tab, chaineReceive, callback) => {
 
 
   var i = 0;
-  /* Recuperation de tout les articles */
+    /* On cherche dans la BDD au niveau de la catégorie reçu avec chaineReceive et on récupère les données */
   firebase.firestore().collection(chaineReceive).get()
     .then((querySnapshot) => {
+      /* On récupère toute les données de cette catégorie sur notre BDD ( on itère jusqu'a ne plus rien avoir ) */
       querySnapshot.forEach((doc) => {
+
+        /* On met les données de la catégorie dans notre tableau */
         tab.push(doc.data());
 
-        console.log("doc ", ++i, "getArticle from catagorie :", chaineReceive, ", from user :", doc.data().username, ", and title :", doc.data().title);
+        /* Affichage dans la console */ 
+        console.log("doc ", ++i, "getArticle from catagorie :", chaineReceive, ", from user :", doc.data().username, ", and title :", doc.data().title,"\n","-------------------------------");
 
-      }), cl();
-    }).catch((error) => {
+      })
 
-      console.error(error);
+      /* callback simple */
+      callback();
+
+    })
+    /* On récupère l'erreur */
+    .catch((error) => {
+
+      /* Affichage dans la console */ 
+      console.error(error,"\n","-------------------------------");
 
     });
 
 }
 /* --------------------------------------------------- */
 
-/*Recuperer les articles de l'utilisateur (une seule catégorie) (TEST OK 24/06/21)*/
+/*Recuperer les articles de l'utilisateur (une seule catégorie) */
 export const getUserArticle = (tab, chaineReceive, callback) => {
 
 
-  /* Recuperation d'e tout les articles' de l'utilisateur */
+  /* On cherche dans la BDD au niveau de l'utilisateur avec son nom d'utilisateur et on récupère les données */
   firebase.firestore().collection(chaineReceive).where("username", "==", cl.usernameLowerCase).get()
     .then((querySnapshot) => {
+
+      /* On récupère toute les données de cette utilisateur sur notre BDD ( on itère jusqu'a ne plus rien avoir ) */
       querySnapshot.forEach((doc) => {
 
         /* On crée un nouveal objet avec l'id du document la categorie et avec les données de l'article (titre,description...) */
         var newData = Object.assign({}, doc.data(), { id: doc.id, category: chaineReceive })
 
-        console.log("getUserArticle from :", doc.data().username, ", and title :", doc.data().title);
+        /* Affichage dans la console */ 
+        console.log("getUserArticle from :", doc.data().username, ", and title :", doc.data().title,"\n","-------------------------------");
+
+        /* On met les données de la catégorie dans notre tableau */
         tab.push(newData);
 
+      })
 
-      }), callback();
-    }).catch((error) => {
+      /* callback simple */
+      callback();
 
-      console.error(error);
+    })
+    /* On récupère l'erreur */
+    .catch((error) => {
+
+      /* Affichage dans la console */ 
+      console.error(error,"\n","-------------------------------");
 
     });
 
@@ -537,7 +607,7 @@ export const getUserArticle = (tab, chaineReceive, callback) => {
 }
 /* --------------------------------------------------- */
 
-/*Recuperer tout les article de l'utilisateur (toute catégorie) (TEST OK 24/06/21)*/
+/*Recuperer tout les article de l'utilisateur (toute catégorie) */
 export const getAllUserArticle = (tabArticle, callback) => {
 
 
@@ -558,21 +628,29 @@ export const getAllUserArticle = (tabArticle, callback) => {
 }
 /* --------------------------------------------------- */
 
-/*Recuperer le nombre d'article de l'utilisateur (une seule catégorie) (TEST OK 24/06/21)*/
+/* Recuperer le nombre d'article de l'utilisateur */
 export const getNbArticle = (callback) => {
 
-  /* Recuperation de tout les articles de l'utilisateur pour connaitre le nombre exacte*/
+  /* On cherche dans la BDD au niveau de l'utilisateur avec son nom d'utilisateur et on récupère les données */
   firebase.firestore().collection("users").where("usernameToLogin", "==", cl.usernameLowerCase).get()
     .then((querySnapshot) => {
+
+      /* On récupère toute les données de cette utilisateur sur notre BDD ( on itère jusqu'a ne plus rien avoir ) */
       querySnapshot.forEach((doc) => {
+        
+        /* Affichage dans la console */
+        console.log("From Id : ", doc.id,", username : ",cl.usernameLowerCase,", we get : ", doc.data().nbArticle, " article in ( getNbArticle ) \n","------------------------------- ");
 
-        console.log("Id : ", doc.id, " => nbArticle : ", doc.data().nbArticle, " in ( getNbArticle )");
-        cl.setNbArticle(doc.data().nbArticle)
+        /* callback avec comme valeur le nombre d'article de l'utilisateur */
+        callback(doc.data().nbArticle)
 
-      }, callback(cl.nbArticle))
-    }).catch((error) => {
+      })
+    })
+    /* On récupère l'erreur */
+    .catch((error) => {
 
-      console.error(error);
+      /* Affichage dans la console */ 
+      console.error(error,"\n","-------------------------------");
 
     });
 
@@ -582,13 +660,13 @@ export const getNbArticle = (callback) => {
 
 
 
-/* Ajouter une Annonce dans la db (TEST OK 24/06/21) */
+/* Ajouter une Annonce dans la BDD */
 export const addArticle = (titleReceive, descriptionReceive, whereAdd, dateReceive, callback) => {
 
+  /* Decla variable pour avoir le nom d'utilisateur et tire en minuscule et le bon nom d'utilisateur a montrer */
   var username = cl.usernameLowerCase;
   var usernameToShow = cl.username;
   var title = titleReceive.toLowerCase();
-  console.log(dateReceive)
 
   /* On recupère le nombre d'article de l'utilisateur */
   getNbArticle((nbArticle) => {
@@ -596,11 +674,12 @@ export const addArticle = (titleReceive, descriptionReceive, whereAdd, dateRecei
     /*Si on a pas atteint le max d'article (4) */
     if (nbArticle < 4) {
 
-      /* On check si les données sont correctement saisie */
+      /* On vérifie si les données sont correctement saisie */
       if ((titleReceive.length >= 6 && titleReceive.length <= 24)) {
 
         if ((descriptionReceive.length >= 6 && descriptionReceive.length <= 300)) {
 
+          /* On vérifie si le titre de l'article est deja utilisé par l'utilisateur */
           isArticleTitleUsed(title, (isTitleUsed) => {
             /* si le titre  d'annonce est disponible et que l'utilisateur n'a pas deja 3 annonces*/
             if (!(isTitleUsed)) {
@@ -618,9 +697,12 @@ export const addArticle = (titleReceive, descriptionReceive, whereAdd, dateRecei
 
               })
                 .then(() => {
-
+                  
+                  /* on incrémente notre variable nbArticle dans clientFonction */
                   cl.setNbArticle(cl.nbArticle + 1);
-                  console.log("Id ici :", cl.id, " ( in addArticle )")
+
+                  /* Affichage dans la console */
+                  console.log("Id ici :", cl.id, " ( in addArticle ) \n","-------------------------------")
 
                   /* On met a jours les valeur pour incrementer le nombre d'article et ajouter le titre de l'article dans le tableau dans la BDD */
                   firebase.firestore().collection("users").doc(cl.id).update({
@@ -631,34 +713,47 @@ export const addArticle = (titleReceive, descriptionReceive, whereAdd, dateRecei
                   })
                     .then(() => {
 
-                      console.log("add success  ( in addArticle )")
+                      /* Affichage dans la console */
+                      console.log("add success  ( in addArticle ) \n","-------------------------------")
+
+                      /* callback avec comme valeur false */
                       callback(false)
 
                     })
                 })
             } else {
 
+              /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (true = maunel) */
               er.printError2("titre-non-disponible", true)
+
+              /* callback avec comme valeur true */
               callback(true)
 
             }
           })
         } else {
 
-          console.log(descriptionReceive.length)
+          /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (true = maunel) */
           er.printError2("descrip-mal-formate", true)
+
+          /* callback avec comme valeur true */
           callback(true)
         }
       } else {
 
+        /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (true = maunel) */
         er.printError2("titre-mal-formate", true)
+
+        /* callback avec comme valeur true */
         callback(true)
 
       }
     } else {
 
+      /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (true = maunel) */
       er.printError2("3-article-max", true)
 
+      /* callback avec comme valeur true */
       callback(true)
     }
 
@@ -669,7 +764,7 @@ export const addArticle = (titleReceive, descriptionReceive, whereAdd, dateRecei
 }
 /* --------------------------------------------------- */
 
-/* Fonction pour savoir si le Titre de l'annonce est deja pris par l'utilisateur (TEST OK 24/06/21) )*/
+/* Fonction pour savoir si le Titre de l'annonce est deja pris par l'utilisateur */
 export const isArticleTitleUsed = (titleToCheck, callback) => {
 
 
@@ -680,16 +775,24 @@ export const isArticleTitleUsed = (titleToCheck, callback) => {
       /* si la valeur est dans le tableau on ne crée pas l'annonce  */
       if (doc.data().article.indexOf(titleToCheck) !== -1) {
 
-        console.log("Titre d'annonce indisponible ( in isArticleTitleUsed )")
+        /* Affichage dans la console */
+        console.log("Titre d'annonce indisponible ( in isArticleTitleUsed ) \n","-------------------------------");
+
+        /* callback avec comme valeur true */
         callback(true)
 
       }
 
-      /* callback avec bool a false  le nom de l'annonce est disponible */
+      /* si la valeur n'est pas dans le tableau on peut crée l'annonce */
       else {
 
+       
+
+        /* Affichage dans la console */
+        console.log("Titre d'annonce disponible ( in isArticleTitleUsed ) \n","-------------------------------");
+
+        /* callback avec comme valeur false */
         callback(false)
-        console.log("Titre d'annonce disponible ( in isArticleTitleUsed )")
 
       }
     })
@@ -697,7 +800,10 @@ export const isArticleTitleUsed = (titleToCheck, callback) => {
     /*Si il y a un erreur on la récupère*/
     .catch((error) => {
 
+      /* Affichage dans la console */
       console.log("Erreur lors de la recherche de l'utilisateur' : ", error, "( in isArticleTitleUsed )");
+
+      /* callback avec comme valeur un caractère vide */
       callback('');
 
     });
@@ -708,6 +814,7 @@ export const isArticleTitleUsed = (titleToCheck, callback) => {
 /* Fonction pour stocker les info récuperer depuis la BDD ( section données utilisateur ) et initialiser les variables dans clientFonction  */
 export const setInfo = (mail) => {
 
+  /* Récupération de tout les données de l'utilisteur */
   getAllInfo(mail, (doc) => {
 
     cl.setMail(doc.data().email);
@@ -766,15 +873,20 @@ export const delArticle = (whereDel, idToDel, TitleToDelete, callback) => {
                 /*On modifie la valeur du nombre articles de la varible dans clientFonction*/
                 cl.setNbArticle(cl.nbArticle - 1)
 
+                /* Callback avec comme valeur true */
                 callback(true);
 
               })
 
-              /*Si il y a une erreur on la récupère*/
-            }).catch((error) => {
+              
+            })
+            /*Si il y a une erreur on la récupère*/
+            .catch((error) => {
 
-              console.error("Error removing document: ", error, "( in isArticleTitleUsed )");
+              /* Affichage dans la console */
+              console.error("Error removing document: ", error, "( in isArticleTitleUsed ) \n","-------------------------------");
 
+              /* Callback avec comme valeur false */
               callback(false)
 
             });
@@ -786,9 +898,10 @@ export const delArticle = (whereDel, idToDel, TitleToDelete, callback) => {
 }
 /* --------------------------------------------------- */
 
-/*Pour rénitialiser les valeurs de l'utilisateur ( les données stocker dans clientFonction )*/
+/* Pour rénitialiser les valeurs de l'utilisateur ( les données stocker dans clientFonction ) */
 export const resetClientData = () => {
 
+  /* Rénitialisation des données */
   cl.setMail("");
   cl.setNbArticle(0);
   cl.setUsername("");

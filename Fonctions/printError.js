@@ -2,19 +2,20 @@
 
 /* Description 
 
-Fonction pour gérer les différentes erreur reçu manuellement (NEW 28/05/21 , A DEVELOPPER)
+Fonction pour gérer les différentes erreur reçu manuellement et reçu depuis firebase
 
 ------------ */
 
 
 
 
-/* Fonction pour gérer les différentes erreur reçu (OK 19/05/21 , A DEVELOPPER) */
+/* Fonction pour gérer les différentes erreur reçu  */
 export var err = " ";
 export var err2 = " ";
 
 export const printError2 = (error, manuel) => {
 
+  /* Si l'erreur ( case ) n'est pas manuel les erreurs ici sont gérer avec firebase */
   if (!(manuel)) {
     switch (error) {
       case "auth/email-already-in-use":
@@ -42,7 +43,9 @@ export const printError2 = (error, manuel) => {
         err2 = "Undefined error."
         break;
     }
-  } else {
+  } 
+  /* Si l'erreur ( case ) est  manuel les erreurs ici sont gérer manuellement */
+  else {
     switch (error) {
       case "mot-de-passe-different":
         err2 = "Passwords do not match."

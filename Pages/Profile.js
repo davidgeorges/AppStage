@@ -83,9 +83,11 @@ export default function App({ navigation }) {
 
     if (isFocused) {
 
-      db.getNbArticle(() => {
+      db.getNbArticle((nbArticle) => {
+
         /* On récupère touter les annonces de l'utilisateur ( toute catégories ) */
         db.getAllUserArticle(tabArticle, () => {
+          cl.setNbArticle(nbArticle)
           setData(tabArticle)
           setLoading(false);
           console.log("PROFILE ICI")
@@ -156,7 +158,7 @@ export default function App({ navigation }) {
 
 
         <View>
-          <Text style={{ alignSelf: "center", borderBottomWidth: 1, marginTop: height/16, }}>MY ARTICLE : </Text>
+          <Text style={{ alignSelf: "center", borderBottomWidth: 1, marginTop: height/16, }}>{cl.nbArticle >1 ? "MY ARTICLES":"MY ARTICLE"}</Text>
         </View>
 
 
