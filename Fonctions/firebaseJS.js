@@ -61,7 +61,9 @@ const setToken = async (data) => {
     await AsyncStorage.setItem("userData", JSON.stringify(data));
 
 
-  } catch (e) {
+  } 
+  /* Recupère l'erreur */
+  catch (e) {
 
     console.log("Something went wrong to set asyncstorage\n","-------------------------------");
 
@@ -76,6 +78,7 @@ const setToken = async (data) => {
 const logWithMail = (mailReceive, passwordReceive, isLoginFailed) => {
 
 
+  /* Connexion a firebase.auth grâce a l'adresse mail et le mot de passe */
   firebase.auth().signInWithEmailAndPassword(mailReceive, passwordReceive)
     .then((res) => {
 
@@ -86,6 +89,7 @@ const logWithMail = (mailReceive, passwordReceive, isLoginFailed) => {
       setToken(res)
 
     })
+    /* Récupère l'erreur */
     .catch((error) => {
 
       //affichage de l'erreur dans la console
@@ -121,6 +125,7 @@ const logWithUsername = (usernameReceiveLowerCase, passwordReceive, isLoginFaile
             setToken(res)
 
           })
+          /* Récupère l'erreur */
           .catch((error) => {
 
             //affichage de l'erreur dans la console
@@ -151,7 +156,7 @@ const logWithUsername = (usernameReceiveLowerCase, passwordReceive, isLoginFaile
 
 
 
-/* Fonction pour se connecter avec nom d'utilisateur ou mail (TEST OK 24/06/21) , passwordReceive, navigation, myTextInput, myTextInput2, callbackF */
+/* Fonction pour se connecter avec nom d'utilisateur ou mail regroupant deux 'sous fonction' */
 export const toLogin = (loginReceive, passwordReceive, callback) => {
   var loginReceiveLowerCase = loginReceive.toLowerCase();
 
@@ -253,7 +258,7 @@ export const toRegister = (email, name, password, confirmPassword, username, nav
               navigation.navigate("Login")
 
             })
-            /* Affichage d'erreur */
+            /* Recupère l'erreur */
             .catch((e) => {
 
               console.log("Err : ", e.code,"\n","-------------------------------");
@@ -906,7 +911,7 @@ export const resetClientData = () => {
   cl.setNbArticle(0);
   cl.setUsername("");
   cl.setUsernameLowerCase("");
-  cl.setId("");
+  cl.setId(""); 
 
   /*rénitialiser les données dans l'asyncstorage*/
   clearAll()

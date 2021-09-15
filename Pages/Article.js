@@ -108,7 +108,7 @@ export default function App({ navigation }) {
           <Text style={{ alignSelf: "center", color: "white" }}>CONFIRM ARTICLE</Text></TouchableOpacity>
       </View>
 
-      <View style={{ flex: 0.5, width: "90%", alignSelf: "center" }}>
+      <View style={{ flex: 0.5, width: "100%", alignSelf: "center" }}>
         <Footer func={() => { navigation.navigate('TabNavigator', { screen: 'Home' }) }}></Footer>
       </View>
 
