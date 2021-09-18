@@ -30,7 +30,7 @@ import Footer from "../Components/Footer2"
 ------------ */
 
 
-export default function App({ navigation }) {
+export default function Article({ navigation }) {
 
   /* Decla var */
   var completeDate;
@@ -38,7 +38,7 @@ export default function App({ navigation }) {
   /* Hooks */
   const [title, setTitle] = useState(" ");
   const [description, setDescription] = useState(" ");
-  const [val, setVal] = useState(" ");
+  const [error, setError] = useState(" ");
   const [selectedValue, setSelectedValue] = useState("info_Article");
 
 
@@ -70,15 +70,15 @@ export default function App({ navigation }) {
         <View style={{ flex: 6, marginTop: "0%", }}>
           <View style={{ position: "absolute", top: 0, alignSelf: "center" }}>
             <View style={styles.sectionStyle}>
-              <TextInput onFocus={() => { setVal("") }} placeholder="Title" placeholderTextColor="gray" style={styles.input} onChangeText={(title) => setTitle(title)} />
+              <TextInput onFocus={() => { setError("") }} placeholder="Title" placeholderTextColor="gray" style={styles.input} onChangeText={(title) => setTitle(title)} />
             </View>
 
             <View style={styles.sectionStyle}>
-              <TextInput multiline={true} numberOfLines={4} onFocus={() => { setVal("") }} placeholder="Description" placeholderTextColor="gray" style={styles.input} onChangeText={(description) => setDescription(description)} />
+              <TextInput multiline={true} numberOfLines={4} onFocus={() => { setError("") }} placeholder="Description" placeholderTextColor="gray" style={styles.input} onChangeText={(description) => setDescription(description)} />
             </View>
 
 
-            <Picker onFocus={() => { setVal("") }} style={{ marginTop: height / 16, }}
+            <Picker onFocus={() => { setError("") }} style={{ marginTop: height / 16, }}
               selectedValue={selectedValue}
               onValueChange={(itemValue) =>
                 setSelectedValue(itemValue)
@@ -90,20 +90,20 @@ export default function App({ navigation }) {
             </Picker>
 
 
-            {val.length < 1 ? null :
+            {error.length < 1 ? null :
               <Animatable.View animation="fadeInLeft" duration={500}>
-                <Text style={{ color: "red", marginTop: height / 60 }}>{val}</Text>
+                <Text style={{ color: "red", marginTop: height / 60 }}>{error}</Text>
               </Animatable.View>}
 
           </View>
         </View>
 
       <View style={{ flex: 1,bottom: height / 14, width: "100%" }}>
-
+              
         <TouchableOpacity style={{
           justifyContent: "center", alignSelf: 'center', backgroundColor: '#001242',
           borderRadius: 40, height: height / 20, width: width / 1.6, position: "absolute", bottom: height / 100
-        }} onPress={() => { getCurrentDate(); db.addArticle(title, description, selectedValue, completeDate, (val) => { if (val) { setVal(er.err2); console.log("val : ", er.err2), Keyboard.dismiss() } else { navigation.navigate("TabNavigator") } }) }}>
+        }} onPress={() => { getCurrentDate(); db.addArticle(title, description, selectedValue, completeDate, (error) => { if (error) { setError(er.err2); console.log("error : ", er.err2), Keyboard.dismiss() } else { navigation.navigate("TabNavigator") } }) }}>
           <Ionicons style={{ alignSelf: 'center', position: "absolute", left: "5%" }} name="add-circle-outline" size={24} color="white" />
           <Text style={{ alignSelf: "center", color: "white" }}>CONFIRM ARTICLE</Text></TouchableOpacity>
       </View>

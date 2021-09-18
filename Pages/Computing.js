@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, View, Text, TouchableHighlight, ScrollView } from 'react-native';
+import { ActivityIndicator, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 const { width, height } = Dimensions.get("screen");
 import { Dimensions } from 'react-native';
 
@@ -28,7 +28,7 @@ export default function Informatique({ navigation }) {
     /* Fonction qui va itérer sur le tableau tabArticle en utilisant la méthode .map et inserer dans le deuxième tableau un élément <TouchableHighligt> avec d'aute element a l'intérieur */
     const infoArticle = () => {
     
-    /* tableau qui va contenir tout les  articles de la catégorie ( <TouchableHighlight> ) */
+    /* tableau qui va contenir tout les  articles de la catégorie ( <TouchableOpacity> ) */
     let listInfoArticle = [];
 
     
@@ -38,7 +38,7 @@ export default function Informatique({ navigation }) {
       listInfoArticle.push(
 
         /*Lorsque on clique sur notre article nous allons nous rediriger vers la page de ProductDetails en lui passant deux paramètres */
-        <TouchableHighlight key={i} style={{ borderRadius: 5, width: "90%", height: height / 14, backgroundColor: '#001242', alignSelf: "center", justifyContent: "center", marginBottom: height / 34 }} onPress={() => {
+        <TouchableOpacity key={i} style={{ borderRadius: 5, width: "90%", height: height / 14, backgroundColor: '#001242', alignSelf: "center", justifyContent: "center", marginBottom: height / 34 }} onPress={() => {
           navigation.navigate('ProductDetails', { id: dataReady.id, data: dataReady })
         }}>
           <View >
@@ -46,11 +46,11 @@ export default function Informatique({ navigation }) {
             <Text style={{ color: "#F5F8DE", alignSelf: "center", }}>By : {dataReady.usernameToShow} </Text>
 
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       )
     })
 
-    /*Tableau qui regroupe tout les articles de la catégorie ( <TouchableHighlight> ) */
+    /*Tableau qui regroupe tout les articles de la catégorie ( <TouchableOpacity> ) */
     return listInfoArticle
   }
 

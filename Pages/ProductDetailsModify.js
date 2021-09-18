@@ -26,7 +26,7 @@ import * as db from '../Fonctions/firebaseJS';
 
 ------------ */
 
-export default function App({ route, navigation: { goBack }, navigation }) {
+export default function ProductDetailsModify({ route, navigation: { goBack }, navigation }) {
 
   /*on récupère les données passer en paramètres lors du .map dans la catégorie concerner*/
   const { data } = route.params;

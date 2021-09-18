@@ -22,7 +22,7 @@ import styles from '../Styles/styleHome';
 import { Ionicons } from '@expo/vector-icons';
 
 
-export default function App({ navigation }) {
+export default function Home({ navigation }) {
 
 
   /* Changement de la couleur de la bare qui contient l'heure,wifi... */

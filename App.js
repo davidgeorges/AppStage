@@ -1,20 +1,22 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+/* Importation des pages */
 import SplashScreen from './Pages/SplashScreen';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Design from './Pages/Design'
 import VideoGame from './Pages/VideoGame'
 import Sport from './Pages/Sport'
-import Informatique from './Pages/Informatique'
+import Computing from './Pages/Computing'
 import Article from './Pages/Article'
 import ProductDetails from './Pages/ProductDetails';
 import ProductDetailsModify from './Pages/ProductDetailsModify';
-import { YellowBox} from "react-native";
 
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 /* Firebase */
 import firebase from 'firebase'
@@ -26,7 +28,7 @@ import TabNavigator from "../App_Stage/Navigation/TabNavigator";
 /* Var pour la navigation */
 const Stack = createStackNavigator();
 
-/* Confirugration database (OK 19/05/21) */
+/* Confirugration BDD */
 export const firebaseConfig = {
   apiKey: "AIzaSyBejP_R_VYJ02J-crnIgin0USNaHqjkyjY",
   authDomain: "appstage-2a382.firebaseapp.com",
@@ -39,23 +41,28 @@ export const firebaseConfig = {
 };
 /* --------------------------------------------------- */
 
-function App({ navigation }) {
+function App() {
 
-  /*Init db */
+  /*Si la BDD n'est pas initialiser*/
   if (!firebase.apps.length) {
+
+    /* On l'initialiser avec la configuration fourni depuis le site de firebase */
     firebase.initializeApp(firebaseConfig);
 
+    /* Affichage montrer le bon déroulement*/
     console.log("Init database success");
 
   } else {
-    firebase.app(); // if already initialized, use that one
+
+    /* Si c'est deja initialiser */
+    firebase.app(); 
   }
 
-  YellowBox.ignoreWarnings([""]);
 
   return (
-    <SafeAreaProvider>
+
       <NavigationContainer>
+
         <Stack.Navigator initialRouteName="SplashScreen" >
           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }}></Stack.Screen>
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
@@ -64,13 +71,13 @@ function App({ navigation }) {
           <Stack.Screen name="ProductDetails" component={ProductDetails} options={{ headerShown: false }} />
           <Stack.Screen name="ProductDetailsModify" component={ProductDetailsModify} options={{ headerShown: false }} />
           <Stack.Screen name="Design" component={Design} options={{ headerShown: false }} />
-          <Stack.Screen name="Informatique" component={Informatique} options={{ headerShown: false }} />
+          <Stack.Screen name="Computing" component={Computing} options={{ headerShown: false }} />
           <Stack.Screen name="VideoGame" component={VideoGame} options={{ headerShown: false }} />
           <Stack.Screen name="Sport" component={Sport} options={{ headerShown: false }} />
           <Stack.Screen name="Article" component={Article} options={{ headerShown: false }} />
         </Stack.Navigator>
+
       </NavigationContainer >
-    </SafeAreaProvider>
 
   );
 }

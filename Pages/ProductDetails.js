@@ -22,7 +22,7 @@ import Footer from "../Components/Footer2"
 /* Icons */
 import { Ionicons } from '@expo/vector-icons';
 
-export default function App({ route, navigation: { goBack }, navigation }) {
+export default function ProductDetails({ route, navigation: { goBack }, navigation }) {
 
 
   /*on récupère les données passer en paramètres lors du .map dans la catégorie concerner*/

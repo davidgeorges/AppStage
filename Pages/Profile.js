@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useIsFocused } from "@react-navigation/native";
 
-import { ActivityIndicator, View, Text,TouchableOpacity, TouchableHighlight } from 'react-native';
+import { ActivityIndicator, View, Text,TouchableOpacity} from 'react-native';
 const { width, height } = Dimensions.get("screen");
 import { Dimensions } from 'react-native';
 
@@ -32,7 +32,7 @@ import styles from 'C:/Users/S/Desktop/React_App_Stage/App_Stage/Styles/stylePro
 import * as db from '../Fonctions/firebaseJS';
 import * as cl from "../Fonctions/clientFonction"
 
-export default function App({ navigation }) {
+export default function Profile({ navigation }) {
 
   const isFocused = useIsFocused();
 
@@ -45,7 +45,7 @@ export default function App({ navigation }) {
   /* Fonction qui va itérer sur le tableau tabArticle en utilisant la méthode .map et inserer dans le deuxième tableau un élément <TouchableHighligt> avec d'aute element a l'intérieur */
   const profileArticle = () => {
 
-    /* tableau qui va contenir tout les  articles de la catégorie ( <TouchableHighlight> ) */
+    /* tableau qui va contenir tout les  articles de la catégorie ( <TouchableOpacity> ) */
     let listProfileArticle = [];
 
     data.map((dataReady, i) => {
@@ -54,7 +54,7 @@ export default function App({ navigation }) {
       listProfileArticle.push(
 
                 /*Lorsque on clique sur notre article nous allons nous rediriger vers la page de ProductDetailsModify en lui passant un paramètre */
-        <TouchableHighlight key={i} style={{ borderRadius: 5, width: "90%", height: height / 22, backgroundColor: '#001242', alignSelf: 'center', justifyContent: "center", marginBottom: height / 34, }} 
+        <TouchableOpacity key={i} style={{ borderRadius: 5, width: "90%", height: height / 22, backgroundColor: '#001242', alignSelf: 'center', justifyContent: "center", marginBottom: height / 34, }} 
         onPress={() => {
           navigation.navigate('ProductDetailsModify', { data: dataReady })
         }}>
@@ -67,11 +67,11 @@ export default function App({ navigation }) {
 
           </View>
 
-        </TouchableHighlight>
+        </TouchableOpacity>
       )
     })
 
-    /*Tableau qui regroupe tout les articles de l'utilisateur ( <TouchableHighlight> ) */
+    /*Tableau qui regroupe tout les articles de l'utilisateur ( <TouchableOpacity> ) */
     return listProfileArticle
   }
 

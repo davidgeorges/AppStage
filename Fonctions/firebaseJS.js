@@ -64,11 +64,13 @@ const setToken = async (data) => {
   } 
   /* Recupère l'erreur */
   catch (e) {
-
+    
+    /* Affichage si erreur */
     console.log("Something went wrong to set asyncstorage\n","-------------------------------");
 
   }
 
+  /* Affichage pour montrer le bon déroulement */
   console.log("Set asyncstorage done : ", data.user.email," \n","-------------------------------");
 }
 /* --------------------------------------------------- */
