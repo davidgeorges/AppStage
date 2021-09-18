@@ -1,12 +1,3 @@
-/* Import de tout ce qu'on a besoin */
-import React, { useState, useEffect } from 'react';
-import { TextInput, Text, View, Button, TouchableOpacity, Image, Keyboard, BackHandler, TouchableWithoutFeedback } from 'react-native';
-import 'react-native-gesture-handler';
-import { setStatusBarBackgroundColor } from 'expo-status-bar';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useFocusEffect } from '@react-navigation/native';
-import * as Animatable from 'react-native-animatable';
-
 /* Description 
 
 -Page pour se connecter
@@ -16,6 +7,14 @@ import * as Animatable from 'react-native-animatable';
 
 ------------ */
 
+/* Import de tout ce qu'on a besoin */
+import React, {useState} from 'react';
+import { TextInput, Text, View, Button, TouchableOpacity, Image, Keyboard, BackHandler, TouchableWithoutFeedback } from 'react-native';
+import 'react-native-gesture-handler';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
+import * as Animatable from 'react-native-animatable';
 import * as db from '../Fonctions/firebaseJS';
 import * as er from '../Fonctions/printError';
 
