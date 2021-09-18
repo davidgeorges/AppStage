@@ -10,19 +10,28 @@
 /* Import de tout ce qu'on a besoin */
 import React, {useState} from 'react';
 import { TextInput, Text, View, Button, TouchableOpacity, Image, Keyboard, BackHandler, TouchableWithoutFeedback } from 'react-native';
-import 'react-native-gesture-handler';
+
+/* Import pour modifier la couleur de  */
 import { setStatusBarBackgroundColor } from 'expo-status-bar';
+
+/* Import d'icon */
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+
+/* Import d'useFocusEffect ( va déclencher une fonction lors du focus sur l'écran ) */ 
 import { useFocusEffect } from '@react-navigation/native';
+
+/* Import pour animer un text */
 import * as Animatable from 'react-native-animatable';
-import * as db from '../Fonctions/firebaseJS';
+
+/* Import fonction login et fonction pour gérer les erreurs */
+import { toLogin }  from '../Fonctions/firebaseJS';
 import * as er from '../Fonctions/printError';
 
-/* Styles */
+/* Import de styles */
 import styles from '../Styles/styleLogin.js';
 
-/* Icon */
-import { AntDesign } from '@expo/vector-icons';
+
 
 
 /* on export la function Login */
@@ -160,7 +169,7 @@ export default function Login({ navigation }) {
               <Button title="Login" color="#51355A" disabled={(mail.length > 1 && password.length > 1) ? false : true}
 
                 onPress={() => {
-                  db.toLogin(mail, password, (error) => {
+                  toLogin(mail, password, (error) => {
 
                     if (error) {
                       setError(er.err2); console.log("Erreur connexion : ", er.err2), Keyboard.dismiss()
