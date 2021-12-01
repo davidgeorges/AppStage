@@ -94,9 +94,6 @@ const logWithMail = (mailReceive, passwordReceive, isLoginFailed) => {
     /* Récupère l'erreur */
     .catch((error) => {
 
-      //affichage de l'erreur dans la console
-      console.log(error,"\n","-------------------------------");
-
       /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase) */
       er.printError2(error.code, false);
 
@@ -130,9 +127,6 @@ const logWithUsername = (usernameReceiveLowerCase, passwordReceive, isLoginFaile
           /* Récupère l'erreur */
           .catch((error) => {
 
-            //affichage de l'erreur dans la console
-            console.log(error,"\n","-------------------------------");
-
             /* Gestion erreur avec en paramètre l'erreur et si l'errur est gerer par nous ou firebase (false = firebase) */
             er.printError2(error.code, false);
 
@@ -164,7 +158,7 @@ export const toLogin = (loginReceive, passwordReceive, callback) => {
 
   /* On considère qu'ont se connecte avec une adresse mail */
   if (loginReceiveLowerCase.includes("@")) {
-    logWithMail(loginReceiveLowerCase, passwordReceive, (failedLogin) => {
+    logWithMail(loginReceiveLowerCase, passwordReceive, (failedLogin, mailReceive) => {
       /* si false = login success */
       if (!(failedLogin)) {
 
@@ -329,10 +323,10 @@ function checkValueReceive(name, password, confirmPassword, usernameLowerCase, c
   if (valueUsername === usernameLowerCase.length) {
     if (usernameLowerCase.length >= 6 && usernameLowerCase.length <= 24) {
       if (valueName === name.length) {
-        if (name.length >= 5 && name.length <= 24) {
+        if (name.length >= 6 && name.length <= 24) {
           if ((password === confirmPassword)) {
             if ((password.length >= 6 && password.length <= 30)) {
-
+ 
             }
             /* Init manuel des erreurs */
             else {

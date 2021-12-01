@@ -15,6 +15,7 @@ import Computing from './Pages/Computing'
 import Article from './Pages/Article'
 import ProductDetails from './Pages/ProductDetails';
 import ProductDetailsModify from './Pages/ProductDetailsModify';
+import { YellowBox } from 'react-native';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -42,6 +43,8 @@ export const firebaseConfig = {
 /* --------------------------------------------------- */
 
 function App() {
+  
+  YellowBox.ignoreWarnings(['Setting a timer']);
 
   /*Si la BDD n'est pas initialiser*/
   if (!firebase.apps.length) {

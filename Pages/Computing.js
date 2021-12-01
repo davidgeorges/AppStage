@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, View, Text, TouchableOpacity, ScrollView } from 'react-native';
-const { width, height } = Dimensions.get("screen");
+const {height } = Dimensions.get("screen");
 import { Dimensions } from 'react-native';
 
 
@@ -23,7 +23,7 @@ import Footer from "../Components/Footer"
 import * as db from '../Fonctions/firebaseJS';
 
 
-export default function Informatique({ navigation }) {
+export default function Computing({ navigation }) {
 
     /* Fonction qui va itérer sur le tableau tabArticle en utilisant la méthode .map et inserer dans le deuxième tableau un élément <TouchableHighligt> avec d'aute element a l'intérieur */
     const infoArticle = () => {
@@ -84,9 +84,9 @@ export default function Informatique({ navigation }) {
 
     <View style={styles.image}>
 
-      <View style={{ flex: 1, backgroundColor: 'white', height: height / 10, borderBottomWidth: 1, width: "90%", alignSelf: 'center',justifyContent:"center" }}>
+      <View style={styles.header}>
 
-        <Text style={{ alignSelf: "center",}}>COMPUTING CATEGORY</Text>
+        <Text style={styles.textHeader}>COMPUTING CATEGORY</Text>
 
       </View>
 
@@ -99,10 +99,6 @@ export default function Informatique({ navigation }) {
             <ActivityIndicator style={{ width: 100, height: 65, alignSelf: "center", justifyContent: 'center', marginRight: "2.5%" }} size="large" color="orange" />
             <Text style={{ marginTop: "5%", alignSelf: "center", justifyContent: 'center', marginLeft: "2.5%" }}>Loading...</Text>
           </View> : infoArticle()}
-
-
-         
-
 
         </ScrollView>
       </View>

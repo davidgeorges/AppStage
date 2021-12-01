@@ -9,9 +9,6 @@ export default StyleSheet.create({
     backgroundColor:"white"
     
   },
-  title: {
-    marginTop: "5%",
-  },
   top: {
     flex: 2,
     ///backgroundColor: "red",
@@ -45,6 +42,7 @@ export default StyleSheet.create({
     width: 100,
     height: 65,
     alignSelf:"center",
+    marginBottom: "5%",
 
   },
   sectionStyle: {
@@ -65,6 +63,7 @@ export default StyleSheet.create({
   },
   register: {
     width: width / 1.4,
+    color:"#2A0C4E"
   },
   shadow: {
     shadowColor:"#7F5DF0",

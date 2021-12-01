@@ -31,6 +31,7 @@ export default function Home({ navigation }) {
 
   /*Pour empecher le fait de revenir en arrière sur la page HOME "*/
   useFocusEffect(
+
     React.useCallback(() => {
       const onBackPress = () => {
 
@@ -39,13 +40,15 @@ export default function Home({ navigation }) {
         return true;
       };
 
-      
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
       console.log("Add listener on home page");
 
 
-      return () =>
+      return () =>{
+
         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        console.log("Remove listener on home page");
+      }
     }),
   );
   /* ---------------------------------------------------------------------- */
@@ -78,7 +81,7 @@ export default function Home({ navigation }) {
           {/*Catégories */}
           <TouchableOpacity style={{
             width: "45%", height: "100%", marginLeft: "5%",/*backgroundColor:"#9E2B25",*/justifyContent: 'center', alignItems: 'center', borderBottomWidth: 1
-          }} onPress={() => { navigation.navigate("Informatique") }}>
+          }} onPress={() => { navigation.navigate("Computing") }}>
             {width >= 575.98 ? <Image style={{ alignSelf: "center", width: width / 5, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/informatique.png')} />
               : <Image style={{ alignSelf: "center", width: width / 3.2, height: height / 7, marginBottom: "5%" }} source={require('C:/Users/S/Desktop/React_App_Stage/App_Stage/Images/informatique.png')} />
             }
